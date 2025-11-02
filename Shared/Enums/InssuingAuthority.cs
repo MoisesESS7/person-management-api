@@ -1,0 +1,40 @@
+﻿using System.Text.Json.Serialization;
+
+namespace Shared.Enums
+{
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum InssuingAuthority
+    {
+        SSP_AC,
+        SSP_AL,
+        SSP_AP,
+        SSP_AM,
+        SSP_BA,
+        SSP_CE,
+        SSP_DF,
+        SSP_ES,
+        SSP_GO,
+        SSP_MA,
+        SSP_MT,
+        SSP_MS,
+        SSP_MG,
+        SSP_PA,
+        SSP_PB,
+        SSP_PR,
+        SSP_PE,
+        SSP_PI,
+        SSP_RJ,
+        SECCIV_RJ,
+        DIC_RJ,
+        PC_RJ,
+        SSP_RN,
+        SSP_RS,
+        SSP_RO,
+        SSP_RR,
+        SSP_SC,
+        SSP_SP,
+        PC_SP,
+        SSP_SE,
+        SSP_TO
+    }
+}
