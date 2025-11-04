@@ -1,0 +1,38 @@
+### Base URL
+@PDI_HostAddress = https://localhost:7252
+@ContentType = application/json
+
+### Get all persons
+GET {{PDI_HostAddress}}/api/persons
+Accept: {{ContentType}}
+
+### Get person by Id
+GET {{PDI_HostAddress}}/api/persons/2a407bc7-5a8c-493e-ae66-6e56fe7e4271
+Accept: {{ContentType}}
+
+### Create person
+POST {{PDI_HostAddress}}/api/persons
+Accept: {{ContentType}}
+Content-Type: {{ContentType}}
+
+{
+    "name": "José Antônio de Souza",
+    "birthDate": "1972-10-21T21:44:44.2Z",
+    "cpfNumber": "09223355694",
+    "cpfRegistrationDate": "2001-11-21T21:44:44.2Z",
+    "rgNumber": "993747414",
+    "rgIssuingAuthority": "SSP_MA"
+}
+
+### Update person
+PUT {{PDI_HostAddress}}/api/persons/a5d44af3-69d3-4604-b2f5-64073afe71f7
+Accept: {{ContentType}}
+Content-Type: {{ContentType}}
+
+{
+  "name": "Maria Silva"
+}
+
+### Delete person
+DELETE {{PDI_HostAddress}}/api/persons/2a407bc7-5a8c-493e-ae66-6e56fe7e4271
+Accept: {{ContentType}}
