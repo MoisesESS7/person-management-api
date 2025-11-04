@@ -68,7 +68,7 @@ namespace Application.Services
                     Cpf = p.Cpf.Number,
                     Rg = p.Rg.Number
                 })
-                .SingleOrDefault();
+                .FirstOrDefault();
 
             if (personFromDb?.Name == command.Name)
                 errors.Add($"There is already a person with that name");
