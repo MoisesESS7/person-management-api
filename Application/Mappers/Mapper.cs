@@ -43,9 +43,9 @@ namespace Application.Mappers
             return personResponse;
         }
 
-        public static ICollection<PersonResponse> ToListPersonResponse(IEnumerable<Person> persons)
+        public static IList<PersonResponse> ToListPersonResponse(IEnumerable<Person> persons)
         {
-            ICollection<PersonResponse> personsResponse = [];
+            IList<PersonResponse> personsResponse = [];
 
             foreach (var person in persons)
             {
