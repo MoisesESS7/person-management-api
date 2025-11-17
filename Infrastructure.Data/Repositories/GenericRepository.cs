@@ -1,8 +1,10 @@
-﻿using Application.Interfaces.Repositories;
+﻿using Application.Common.Models;
+using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data.Common;
 using Infrastructure.Data.Data.Context;
 using Infrastructure.Data.Exceptions;
+using Infrastructure.Data.Extensions;
 using MongoDB.Driver;
 using System.Linq.Expressions;
 
@@ -21,12 +23,12 @@ namespace Infrastructure.Data.Repositories
 
         public IQueryable<TEntity> AsQueryable()
         {
-            return _collection.AsQueryable();    
+            return _collection.AsQueryable();
         }
 
         public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default)
         {
-            var result = await _executor.ExecuteAsync(() => 
+            var result = await _executor.ExecuteAsync(() =>
                                     _collection
                                         .Find(expression)
                                         .FirstOrDefaultAsync(cancellationToken));
@@ -34,14 +36,21 @@ namespace Infrastructure.Data.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TEntity>> SeachPagedAsync(SearchParams searchParams, CancellationToken cancellationToken = default)
         {
-            var result = await _executor.ExecuteAsync(() => 
-                                    _collection
-                                        .Find(_ => true)
-                                        .ToListAsync(cancellationToken));
+            var filter = string.IsNullOrWhiteSpace(searchParams.SearchTerm)
+                ? Builders<TEntity>.Filter.Empty
+                : Builders<TEntity>.Filter.Text(searchParams.SearchTerm);
 
-            return result;
+            var skip = (searchParams.PageNumber - 1) * searchParams.PageSize;
+
+            var items = await _collection.Find(filter)
+                                   .ApplyOrdering(searchParams.SortBy, searchParams.SortDescending)
+                                   .Skip(skip)
+                                   .Limit(searchParams.PageSize)                                
+                                   .ToListAsync(cancellationToken);
+
+            return items;
         }
 
         public async Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
@@ -54,12 +63,12 @@ namespace Infrastructure.Data.Repositories
 
         public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            if(entity is null)
+            if (entity is null)
                 throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
 
             var filter = Builders<TEntity>.Filter.Eq(x => x.Id, entity.Id);
 
-            var result = await _executor.ExecuteAsync(() => 
+            var result = await _executor.ExecuteAsync(() =>
                                     _collection.ReplaceOneAsync(filter, entity, cancellationToken: cancellationToken));
 
             if (result.ModifiedCount <= 0)
@@ -70,7 +79,7 @@ namespace Infrastructure.Data.Repositories
 
         public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellationToken = default)
         {
-            var result = await _executor.ExecuteAsync(() => 
+            var result = await _executor.ExecuteAsync(() =>
                                     _collection.DeleteOneAsync(expression, cancellationToken));
 
             if (result.DeletedCount <= 0)

@@ -1,6 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.OpenApi.Models;
+﻿using Api.Builders;
 using Api.Mappers;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.OpenApi.Models;
 
 namespace Api
 {
@@ -13,6 +15,10 @@ namespace Api
             {
                 c.AddProfile(typeof(PersonProfile));
             });
+
+            // LinkBuiler
+            service.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            service.AddScoped<ILinkBuilder, LinkBuilder>();
 
             // Swagger
             ConfigureSwagger(service, configuration);

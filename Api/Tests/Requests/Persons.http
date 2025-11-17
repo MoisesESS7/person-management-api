@@ -3,7 +3,7 @@
 @ContentType = application/json
 
 ### Get all persons
-GET {{PDI_HostAddress}}/api/persons
+GET {{PDI_HostAddress}}/api/persons?page=1&page-size=5
 Accept: {{ContentType}}
 
 ### Get person by Id
@@ -16,11 +16,11 @@ Accept: {{ContentType}}
 Content-Type: {{ContentType}}
 
 {
-    "name": "José Antônio de Souza",
-    "birthDate": "1972-10-21T21:44:44.2Z",
-    "cpfNumber": "09223355694",
-    "cpfRegistrationDate": "2001-11-21T21:44:44.2Z",
-    "rgNumber": "993747414",
+    "name": "Camila Cristina dos Santos",
+    "birthDate": "2007-07-13T21:44:44.2Z",
+    "cpfNumber": "74778392049",
+    "cpfRegistrationDate": "2007-11-01T21:44:44.2Z",
+    "rgNumber": "282759603",
     "rgIssuingAuthority": "SSP_MA"
 }
 

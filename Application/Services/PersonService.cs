@@ -1,4 +1,5 @@
 ﻿using Application.Commands.Persons;
+using Application.Common.Models;
 using Application.Common.Response.Persons;
 using Application.Exceptions;
 using Application.Interfaces.Repositories;
@@ -22,18 +23,29 @@ namespace Application.Services
             _personRepository = personRepository;
         }
 
-        public async Task<IEnumerable<PersonResponse>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<PagedResult<PersonResponse>> SearchPagedAsync(SearchParams searchParams, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Getting all persons...");
-            var persons = await _personRepository.GetAllAsync(cancellationToken);
+
+            var totalRecords = await _personRepository.CountAsync(cancellationToken: cancellationToken);
+
+            var pageMeta = new PageMeta(searchParams.PageNumber, searchParams.PageSize, totalRecords);
+
+            var persons = await _personRepository.SeachPagedAsync(searchParams, cancellationToken);
+
+            var personList = Mapper.ToListPersonResponse(persons);
             
-            var response = Mapper.ToListPersonResponse(persons)
-                                 .OrderBy(p => p.Name)
-                                 .ToList();
+            var paginationMeta = new PaginationMeta(pageMeta);
+            var pagedResult = new PagedResult<PersonResponse>(personList, paginationMeta);
 
-            _logger.LogInformation("Retrieved {Count} persons", response.Count);
+            _logger.LogInformation(
+                "Retrieved {Count} persons (page {Page}/{TotalPages})",
+                pagedResult.Data.Count,
+                searchParams.PageNumber,
+                pageMeta.TotalPages
+            );
 
-            return response;
+            return pagedResult;
         }
 
         public async Task<PersonResponse> GetAsync(string value, CancellationToken cancellationToken = default)
