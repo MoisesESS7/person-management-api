@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
 using Infrastructure.Data.Common;
-using Infrastructure.Data.Data.Context;
+using Infrastructure.Data.Context;
 using Infrastructure.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
