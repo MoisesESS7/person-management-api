@@ -2,7 +2,7 @@
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data.Common;
-using Infrastructure.Data.Data.Context;
+using Infrastructure.Data.Context;
 using Infrastructure.Data.Exceptions;
 using Infrastructure.Data.Extensions;
 using MongoDB.Driver;

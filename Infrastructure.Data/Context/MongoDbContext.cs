@@ -1,10 +1,10 @@
-﻿using Infrastructure.Data.Data.Indexes;
-using Infrastructure.Data.Extensions;
+﻿using Infrastructure.Data.Extensions;
+using Infrastructure.Data.Indexes;
 using Infrastructure.Data.Persistence;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace Infrastructure.Data.Data.Context
+namespace Infrastructure.Data.Context
 {
     public class MongoDbContext : IMongoDbContext
     {
