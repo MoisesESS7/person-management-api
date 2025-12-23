@@ -1,4 +1,5 @@
 using Api.Builders;
+using Api.Extensions;
 using Api.Models;
 using Api.Requests.Persons;
 using Application.Commands.Persons;
@@ -36,9 +37,13 @@ namespace Api.Controllers
         {
             _logger.LogInformation("Retrieving person with ID {Id}.", id);
             var result = await _personService.GetAsync(id);
-            var response = _mapper.Map<ApiPersonResponse>(result);
-            _logger.LogInformation("Person with ID {Id} retrieved successfully.", id);
 
+            if (result.IsFailure)
+                return result.ToActionResult();
+
+            var response = _mapper.Map<ApiPersonResponse>(result.Value);
+
+            _logger.LogInformation("Person with ID {Id} retrieved successfully.", id);
             return Ok(response);
         }
 
@@ -58,13 +63,16 @@ namespace Api.Controllers
             
             var result = await _personService.SearchPagedAsync(searchParams);
 
-            var response = _mapper.Map<PagedResponse<ApiPersonResponse>>(result);
+            if (result.IsFailure)
+                return result.ToActionResult();
+            
+            var response = _mapper.Map<PagedResponse<ApiPersonResponse>>(result.Value);
 
             var links = _linkBuilder.Build(
                 "Paged",
                 searchParams.PageNumber,
                 searchParams.PageSize,
-                result.Meta.PageMeta?.TotalPages ?? 0
+                result.Value?.Meta.PageMeta?.TotalPages ?? 0
             );
 
             response.SetLinks(links);
@@ -73,7 +81,7 @@ namespace Api.Controllers
                 "Retrieved {Count} persons (page {Page}/{TotalPages})",
                 response.Data.Count,
                 searchParams.PageNumber,
-                result.Meta.PageMeta?.TotalPages ?? 0
+                result.Value?.Meta.PageMeta?.TotalPages ?? 0
             );
             
             return Ok(response);
@@ -84,8 +92,14 @@ namespace Api.Controllers
         {
             _logger.LogInformation("Creating new person with name: {Name}", request.Name);
             var command = _mapper.Map<CreatePersonCommand>(request);
+
             var result = await _personService.CreateAsync(command);
-            var response = _mapper.Map<ApiPersonResponse>(result);
+
+            if (result.IsFailure)
+                return result.ToActionResult();
+
+            var response = _mapper.Map<ApiPersonResponse>(result.Value);
+
             _logger.LogInformation("Person created successfully with ID {ID}", response.Id);
 
             return CreatedAtAction("Get", new
@@ -100,11 +114,17 @@ namespace Api.Controllers
         {
             _logger.LogInformation("Updating person with ID {Id}", id);
             request.SetId(id);
-            var command = _mapper.Map<UpdatePersonCommand>(request);
-            var result = await _personService.UpdateAsync(command);
-            var response = _mapper.Map<ApiPersonResponse>(result);
-            _logger.LogInformation("Person with ID {Id} updated successfully.", id);
 
+            var command = _mapper.Map<UpdatePersonCommand>(request);
+
+            var result = await _personService.UpdateAsync(command);
+
+            if (result.IsFailure)
+                return result.ToActionResult();
+
+            var response = _mapper.Map<ApiPersonResponse>(result.Value);
+
+            _logger.LogInformation("Person with ID {Id} updated successfully.", id);
             return Ok(response);
         }
 
@@ -112,9 +132,12 @@ namespace Api.Controllers
         public async Task<ActionResult> DeleteAsync([FromRoute] string id)
         {
             _logger.LogInformation("Deleting person with ID {Id}", id);
-            await _personService.DeleteAsync(id);
-            _logger.LogInformation("Person with ID {Id} deleted successfully.", id);
+            var result = await _personService.DeleteAsync(id);
 
+            if (result.IsFailure)
+                return result.ToActionResult();
+
+            _logger.LogInformation("Person with ID {Id} deleted successfully.", id);
             return NoContent();
         }
     }
