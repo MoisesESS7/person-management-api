@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Shared.Exceptions;
+﻿using Shared.Exceptions;
 
 namespace Application.Exceptions
 {
     public class ApplicationLayerException : BaseAppException
     {
-        public override int StatusCode => StatusCodes.Status422UnprocessableEntity;
+        public override int StatusCode => 422;
         public override string Title => "Application process error";
         public override string Type => "https://httpstatuses.com/422";
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Exceptions;
-using Shared.Utils;
+using Api.Utils;
 using System.Diagnostics;
 
 namespace Api.Middlewares

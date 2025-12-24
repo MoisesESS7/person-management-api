@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Shared.Exceptions;
+﻿using Shared.Exceptions;
 
 namespace Domain.Exceptions
 {
     public class DomainLayerException : BaseAppException
     {
-        public override int StatusCode => StatusCodes.Status400BadRequest;
+        public override int StatusCode => 400;
         public override string Title => "Domain validation Error";
         public override string Type => "https://httpstatuses.com/400";
 

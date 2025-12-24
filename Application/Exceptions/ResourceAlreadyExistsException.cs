@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Application.Exceptions
+﻿namespace Application.Exceptions
 {
     public class ResourceAlreadyExistsException : ApplicationLayerException
     {
-        public override int StatusCode => StatusCodes.Status409Conflict;
+        public override int StatusCode => 409;
         public override string Title => "Resource already exists";
         public override string Type => "https://httpstatuses.com/409";
 

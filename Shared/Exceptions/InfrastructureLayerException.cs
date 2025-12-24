@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Shared.Exceptions
+﻿namespace Shared.Exceptions
 {
     public class InfrastructureLayerException : BaseAppException
     {
-        public override int StatusCode => StatusCodes.Status500InternalServerError;
         public override string Title => "Infrastructure error.";
-        public override string Type => "https://httpstatuses.com/500";
 
         public InfrastructureLayerException() { }
         public InfrastructureLayerException(string? message) : base(message) { }

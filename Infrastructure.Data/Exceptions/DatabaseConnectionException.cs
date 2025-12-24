@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Shared.Exceptions;
+﻿using Shared.Exceptions;
 
 namespace Infrastructure.Data.Exceptions
 {
     public class DatabaseConnectionException : InfrastructureLayerException
     {
-        public override int StatusCode => StatusCodes.Status503ServiceUnavailable;
+        public override int StatusCode => 503;
         public override string Title => "Database connection error";
         public override string Type => "https://httpstatuses.com/503";
 

@@ -54,7 +54,7 @@ namespace Infrastructure.Data.Common
                     {
                         return await operation();
                     },
-                    new Context(operationName)
+                    new Polly.Context(operationName)
                 );
             }
             catch (MongoException ex)

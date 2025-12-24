@@ -1,8 +1,5 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Shared.Enums
+﻿namespace Shared.Enums
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum InssuingAuthority
     {
         SSP_AC,

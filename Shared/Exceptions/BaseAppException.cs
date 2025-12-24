@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Shared.Exceptions
+﻿namespace Shared.Exceptions
 {
     public class BaseAppException : Exception
     {
-        public virtual int StatusCode { get; set; } = StatusCodes.Status500InternalServerError;
+        public virtual int StatusCode { get; set; } = 500;
         public virtual string Title { get; set; } = "Application error.";
         public virtual string Type { get; set; } = "https://httpstatuses.com/500";
         public IReadOnlyCollection<string> Errors { get; } = [];
