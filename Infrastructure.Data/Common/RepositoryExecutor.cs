@@ -70,7 +70,7 @@ namespace Infrastructure.Data.Common
                 if (ex is MongoWriteException || ex is MongoWriteConcernException)
                     throw new DatabaseWriteException("The MongoDB operation write failed.", ex);
 
-                throw new InfrastructureLayerException("A MongoDB error occurred.", ex);
+                throw new BaseAppException("A MongoDB error occurred.", ex);
             }
             catch (TimeoutException ex)
             {
@@ -80,7 +80,7 @@ namespace Infrastructure.Data.Common
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unexpected error in operation {Operation}", operationName);
-                throw new InfrastructureLayerException("Unexpected error in repository layer.", ex);
+                throw new BaseAppException("Unexpected error in repository layer.", ex);
             }
         }        
     }
