@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Data.Exceptions
 {
-    public class DatabaseWriteException : InfrastructureLayerException
+    public class DatabaseWriteException : BaseAppException
     {
         public override string Title => "Database write error";
 

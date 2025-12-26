@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Data.Exceptions
 {
-    public class DatabaseConnectionException : InfrastructureLayerException
+    public class DatabaseConnectionException : BaseAppException
     {
         public override int StatusCode => 503;
         public override string Title => "Database connection error";

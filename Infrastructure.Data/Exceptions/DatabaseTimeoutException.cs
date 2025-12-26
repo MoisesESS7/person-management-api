@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Data.Exceptions
 {
-    public class DatabaseTimeoutException : InfrastructureLayerException
+    public class DatabaseTimeoutException : BaseAppException
     {
         public override int StatusCode => 504;
         public override string Title => "Database timed out error";
