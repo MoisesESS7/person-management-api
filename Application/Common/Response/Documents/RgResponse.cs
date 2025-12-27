@@ -6,7 +6,7 @@ namespace Application.Common.Response.Documents
     {
         public InssuingAuthority IssuingAuthority { get; private set; }
 
-        public RgResponse(string number, DateTime birthDate, InssuingAuthority issuingAuthority) : base(number, birthDate)
+        public RgResponse(string number, DateTimeOffset birthDate, InssuingAuthority issuingAuthority) : base(number, birthDate)
         {
             IssuingAuthority = issuingAuthority;
         }

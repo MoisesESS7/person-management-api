@@ -2,9 +2,9 @@
 {
     public class CpfResponse : DocumentResponse
     {
-        public DateTime RegistrationDate { get; private set; }
+        public DateTimeOffset RegistrationDate { get; private set; }
 
-        public CpfResponse(string number, DateTime birthDate, DateTime registrationDate) : base(number, birthDate)
+        public CpfResponse(string number, DateTimeOffset birthDate, DateTimeOffset registrationDate) : base(number, birthDate)
         {
             RegistrationDate = registrationDate;
         }
