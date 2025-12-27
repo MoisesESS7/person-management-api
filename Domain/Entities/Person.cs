@@ -21,7 +21,7 @@ namespace Domain.Entities
             Validation();
         }
 
-        private void CalculeteAge(DateTime birthDate) => Age = DateTime.Now.Year - birthDate.Year;
+        private void CalculeteAge(DateTimeOffset birthDate) => Age = DateTimeOffset.Now.Year - birthDate.Year;
 
         public void Update(string name)
         {

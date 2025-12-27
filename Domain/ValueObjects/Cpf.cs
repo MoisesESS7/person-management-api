@@ -5,9 +5,9 @@ namespace Domain.ValueObjects
 {
     public sealed class Cpf : Document
     {
-        public DateTime RegistrationDate { get; private set; }
+        public DateTimeOffset RegistrationDate { get; private set; }
 
-        public Cpf(string number, DateTime birthDate, DateTime registrationDate) : base(number, birthDate)
+        public Cpf(string number, DateTimeOffset birthDate, DateTimeOffset registrationDate) : base(number, birthDate)
         {
             RegistrationDate = registrationDate;
             Validation();

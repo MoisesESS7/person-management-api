@@ -5,9 +5,9 @@ namespace Domain.ValueObjects.Bases
     public abstract class Document
     {
         public string Number { get; private set; }
-        public DateTime BirthDate { get; private set; }
+        public DateTimeOffset BirthDate { get; private set; }
 
-        protected Document(string number, DateTime birthDate)
+        protected Document(string number, DateTimeOffset birthDate)
         {
             Number = number;
             BirthDate = birthDate;
@@ -24,7 +24,7 @@ namespace Domain.ValueObjects.Bases
             if (BirthDate == default)
                 errors.Add("The birth date can be informed.");
 
-            if (BirthDate.Date > DateTime.Now.Date)
+            if (BirthDate.Date > DateTimeOffset.Now.Date)
                 errors.Add("The birth date cannot has in future.");
 
             if(errors.Count > 0)

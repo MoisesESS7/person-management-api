@@ -8,7 +8,7 @@ namespace Domain.ValueObjects
     {
         public InssuingAuthority IssuingAuthority { get; private set; }
 
-        public Rg(string number, DateTime birthDate, InssuingAuthority issuingAuthority) : base(number, birthDate)
+        public Rg(string number, DateTimeOffset birthDate, InssuingAuthority issuingAuthority) : base(number, birthDate)
         {
             IssuingAuthority = issuingAuthority;
             Validation();
