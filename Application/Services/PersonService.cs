@@ -99,7 +99,7 @@ namespace Application.Services
                 return ResultOfT<PersonResponse>.Fail(Errors.Rg.DuplicateNumber);
             }
 
-            var person = Mapper.ToPersonDomain(command);
+            var person = Mapper.ToPerson(command);
 
             var personCreated = await _personRepository.CreateAsync(person, cancellationToken);
 
@@ -112,19 +112,21 @@ namespace Application.Services
         public async Task<ResultOfT<PersonResponse>> UpdateAsync(UpdatePersonCommand command, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Updating person with Id: {Id}", command.Id);
+            var exists = await _personRepository.ExistsAsync(p => p.Name == command.Name, cancellationToken);
+            
+            if (exists)
+            {
+                _logger.LogWarning("There is already a person with that name: {Name}.", command.Name);
+                return ResultOfT<PersonResponse>.Fail(Errors.Person.DuplicateName);
+            }
+
             var person = await _personRepository.GetAsync(p => p.Id == command.Id, cancellationToken);
 
             if (person is null)
             {
                 _logger.LogWarning("Person with Id {Id} not found", command.Id);
                 return ResultOfT<PersonResponse>.Fail(Errors.Person.NotFound);
-            }
-            
-            if (person.Name == command.Name)
-            {
-                _logger.LogWarning("There is already a person with that name: {Name}.", person.Name);
-                return ResultOfT<PersonResponse>.Fail(Errors.Person.DuplicateName);
-            }
+            }            
 
             person.Update(command.Name);
 
