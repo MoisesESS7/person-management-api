@@ -1,6 +1,7 @@
 ﻿using Domain.Attributes;
 using Domain.Exceptions.Persons;
 using Domain.ValueObjects;
+using Shared.Enums;
 
 namespace Domain.Entities
 {
@@ -12,13 +13,28 @@ namespace Domain.Entities
         public Cpf Cpf { get; private set; }
         public Rg Rg { get; private set; }
 
-        public Person(string name, Cpf cpf, Rg rg)
+        private Person(string name, Cpf cpf, Rg rg)
         {
             Name = name;
             Rg = rg;
             Cpf = cpf;
             CalculeteAge(rg.BirthDate);
             Validation();
+        }
+
+        public static Person Create(
+            string name,
+            string cpfNumber,
+            DateTimeOffset cpfBirthDate,
+            DateTimeOffset cpfRegistrationDate,
+            string rgNumber,
+            DateTimeOffset rgBirthDate,
+            InssuingAuthority issuingAuthority)
+        {
+            var cpf = new Cpf(cpfNumber, cpfBirthDate, cpfRegistrationDate);
+            var rg = new Rg(rgNumber, rgBirthDate, issuingAuthority);
+
+            return new Person(name, cpf, rg);
         }
 
         private void CalculeteAge(DateTimeOffset birthDate) => Age = DateTimeOffset.Now.Year - birthDate.Year;

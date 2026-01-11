@@ -9,24 +9,16 @@ namespace Application.Mappers
 {
     public static class Mapper
     {
-        public static Person ToPersonDomain<T>(T input) where T : PersonCommandBase
+        public static Person ToPerson<T>(T input) where T : PersonCommandBase
         {
-            var cpf = new Cpf(
+            return Person.Create(
+                input.Name,
                 input.Cpf.Number,
                 input.Cpf.BirthDate,
-                input.Cpf.RegistrationDate);
-
-            var rg = new Rg(
+                input.Cpf.RegistrationDate,
                 input.Rg.Number,
                 input.Rg.BirthDate,
                 input.Rg.IssuingAuthority);
-
-            var person = new Person(
-                input.Name,
-                cpf,
-                rg);
-
-            return person;
         }
 
         public static PersonResponse ToPersonResponse(Person person)
@@ -35,52 +27,24 @@ namespace Application.Mappers
             var rgResponse = CreateRgResponse(person.Rg);
             var auditable = CreateAuditable(person.Auditable);
 
-            var personResponse = new PersonResponse(
+            return new (
                 person.Id,
                 auditable,
                 person.Name,
                 person.Age,
                 cpfResponse,
                 rgResponse);
-
-            return personResponse;
         }
 
-        public static IList<PersonResponse> ToListPersonResponse(IEnumerable<Person> persons)
-        {
-            IList<PersonResponse> personsResponse = [];
+        public static IList<PersonResponse> ToListPersonResponse(IEnumerable<Person> persons) => [.. persons.Select(ToPersonResponse)];
 
-            foreach (var person in persons)
-            {
-                var personResponse = ToPersonResponse(person);
-                personsResponse.Add(personResponse);
-            }
+        private static CpfResponse CreateCpfResponse(Cpf cpf) =>
+            new(cpf.Number, cpf.BirthDate, cpf.RegistrationDate);
 
-            return personsResponse;
-        }
+        private static RgResponse CreateRgResponse(Rg rg) =>
+            new(rg.Number, rg.BirthDate, rg.IssuingAuthority);
 
-        private static CpfResponse CreateCpfResponse(Cpf cpf)
-        {
-            return new CpfResponse(
-                cpf.Number,
-                cpf.BirthDate,
-                cpf.RegistrationDate);
-        }
-
-        private static RgResponse CreateRgResponse(Rg rg)
-        {
-            return new RgResponse(
-                rg.Number,
-                rg.BirthDate,
-                rg.IssuingAuthority);
-        }
-        
-        private static AuditableEntityResponse CreateAuditable(AuditableEntity auditable)
-        {
-            return new AuditableEntityResponse(
-                auditable.CreatedAt,
-                auditable.UpdatedAt,
-                auditable.DeletedAt);
-        }
+        private static AuditableEntityResponse CreateAuditable(AuditableEntity auditable) =>
+            new(auditable.CreatedAt, auditable.UpdatedAt, auditable.DeletedAt);
     }
 }
