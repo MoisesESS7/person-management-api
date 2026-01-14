@@ -1,6 +1,6 @@
 ﻿using Shared.Enums;
 
-namespace Api.Requests.Persons
+namespace Api.Contracts.Requests.Persons
 {
     public class CreatePersonRequest
     {

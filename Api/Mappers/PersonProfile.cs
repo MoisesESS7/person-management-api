@@ -1,5 +1,5 @@
-﻿using Api.Models;
-using Api.Requests.Persons;
+﻿using Api.Contracts.Requests.Persons;
+using Api.Models;
 using Application.Common.Models;
 using Application.Features.Persons.Commands.Create;
 using Application.Features.Persons.Commands.Delete;
@@ -8,7 +8,7 @@ using Application.Features.Persons.Queries.GetById;
 using Application.Features.Persons.Queries.PagedSearch;
 using AutoMapper;
 using ApiPaginationMeta = Api.Models.PaginationMeta;
-using ApiPersonResponse = Api.Responses.Persons.PersonResponse;
+using ApiPersonResponse = Api.Contracts.Responses.Persons.PersonResponse;
 using AppPersonResponse = Application.Features.Persons.Responses.PersonResponse;
 
 namespace Api.Mappers

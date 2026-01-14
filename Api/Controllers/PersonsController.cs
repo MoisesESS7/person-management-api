@@ -1,6 +1,6 @@
 using Api.Builders;
+using Api.Contracts.Requests.Persons;
 using Api.Models;
-using Api.Requests.Persons;
 using Application.Features.Persons.Commands.Create;
 using Application.Features.Persons.Commands.Delete;
 using Application.Features.Persons.Commands.Update;
@@ -9,7 +9,7 @@ using Application.Features.Persons.Queries.PagedSearch;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ApiPersonResponse = Api.Responses.Persons.PersonResponse;
+using ApiPersonResponse = Api.Contracts.Responses.Persons.PersonResponse;
 
 namespace Api.Controllers
 {
