@@ -2,7 +2,10 @@
 using Api.Requests.Persons;
 using Application.Common.Models;
 using Application.Features.Persons.Commands.Create;
+using Application.Features.Persons.Commands.Delete;
 using Application.Features.Persons.Commands.Update;
+using Application.Features.Persons.Queries.GetById;
+using Application.Features.Persons.Queries.PagedSearch;
 using AutoMapper;
 using ApiPaginationMeta = Api.Models.PaginationMeta;
 using ApiPersonResponse = Api.Responses.Persons.PersonResponse;
@@ -14,8 +17,25 @@ namespace Api.Mappers
     {
         public PersonProfile()
         {
+            CreateMap<string, GetPersonByIdQuery>()
+                .ConstructUsing(id => new GetPersonByIdQuery(id));
+
+            CreateMap<string, DeletePersonCommand>()
+                .ConstructUsing(id => new DeletePersonCommand(id));
+
             CreateMap<UpdatePersonRequest, UpdatePersonCommand>()
                 .ConstructUsing(src => new UpdatePersonCommand(src.Id, src.Name));
+
+            CreateMap<SearchParamsQuery, PagedSearchQuery>()
+                .ConstructUsing(src =>
+                    new PagedSearchQuery(new SearchParams
+                    {
+                        PageNumber = src.PageNumber,
+                        PageSize = src.PageSize,
+                        SearchTerm = src.SearchTerm,
+                        SortBy = src.SortBy,
+                        SortDescending = src.SortDescending
+                    }));
 
             CreateMap<CreatePersonRequest, CreatePersonCommand>()
                 .ConstructUsing(src => new CreatePersonCommand(
