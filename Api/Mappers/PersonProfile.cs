@@ -1,12 +1,12 @@
 ﻿using Api.Models;
 using Api.Requests.Persons;
-using Application.Commands.Persons;
-using Application.Common.Commands.Documents;
 using Application.Common.Models;
+using Application.Features.Persons.Commands.Create;
+using Application.Features.Persons.Commands.Update;
 using AutoMapper;
 using ApiPaginationMeta = Api.Models.PaginationMeta;
 using ApiPersonResponse = Api.Responses.Persons.PersonResponse;
-using AppPersonResponse = Application.Common.Response.Persons.PersonResponse;
+using AppPersonResponse = Application.Features.Persons.Responses.PersonResponse;
 
 namespace Api.Mappers
 {
@@ -20,23 +20,26 @@ namespace Api.Mappers
             CreateMap<CreatePersonRequest, CreatePersonCommand>()
                 .ConstructUsing(src => new CreatePersonCommand(
                     src.Name,
-                    new CpfCommand(src.CpfNumber, src.BirthDate, src.CpfRegistrationDate),
-                    new RgCommand(src.RgNumber, src.BirthDate, src.RgIssuingAuthority)
+                    src.BirthDate,
+                    src.CpfNumber,
+                    src.CpfRegistrationDate,
+                    src.RgNumber,
+                    src.RgIssuingAuthority
                 ));
 
             CreateMap<AppPersonResponse, ApiPersonResponse>()
                 .ConstructUsing(src => new ApiPersonResponse(
                         src.Id,
                         src.Name,
-                        src.Auditable.CreatedAt,
-                        src.Auditable.UpdatedAt,
-                        src.Auditable.DeletedAt,
+                        src.CreatedAt,
+                        src.UpdatedAt,
+                        src.DeletedAt,
                         src.Age,
-                        src.Rg.BirthDate,
-                        src.Cpf.Number,
-                        src.Cpf.RegistrationDate,
-                        src.Rg.Number,
-                        src.Rg.IssuingAuthority)
+                        src.BirthDate,
+                        src.CpfNumber,
+                        src.CpfRegistrationDate,
+                        src.RgNumber,
+                        src.RgIssuingAuthority)
                 );
 
             CreateMap<PagedResult<AppPersonResponse>, PagedResponse<ApiPersonResponse>>()
@@ -45,15 +48,15 @@ namespace Api.Mappers
                         src.Data.Select(item => new ApiPersonResponse(
                             item.Id,
                             item.Name,
-                            item.Auditable.CreatedAt,
-                            item.Auditable.UpdatedAt,
-                            item.Auditable.DeletedAt,
+                            item.CreatedAt,
+                            item.UpdatedAt,
+                            item.DeletedAt,
                             item.Age,
-                            item.Rg.BirthDate,
-                            item.Cpf.Number,
-                            item.Cpf.RegistrationDate,
-                            item.Rg.Number,
-                            item.Rg.IssuingAuthority))
+                            item.BirthDate,
+                            item.CpfNumber,
+                            item.CpfRegistrationDate,
+                            item.RgNumber,
+                            item.RgIssuingAuthority))
                         .ToList(),
 
                         new ApiPaginationMeta
