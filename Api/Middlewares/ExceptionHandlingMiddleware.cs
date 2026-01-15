@@ -2,6 +2,7 @@
 using Shared.Exceptions;
 using Api.Utils;
 using System.Diagnostics;
+using FluentValidation;
 
 namespace Api.Middlewares
 {
@@ -34,7 +35,24 @@ namespace Api.Middlewares
 
             ProblemDetails problem;
 
-            if (exception is BaseAppException appException)
+            if (exception is ValidationException validationException)
+            {
+                var errors = validationException.Errors
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                _logger.LogWarning("Validation error [{TraceId}] - {Errors}", traceId, errors);
+
+                problem = CreateProblemDetails(
+                    type: "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1",
+                    title: "Validation Error",
+                    detail: "One or more validation errors occurred.",
+                    statusCode: StatusCodes.Status400BadRequest,
+                    instance: context.Request.Path,
+                    errors: errors
+                );
+            }
+            else if (exception is BaseAppException appException)
             {
                 _logger.LogWarning(exception, "Handled exception [{TraceId}]", traceId);
                 problem = CreateProblemDetails(
