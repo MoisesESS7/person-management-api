@@ -1,12 +1,15 @@
 using Api.Builders;
+using Api.Contracts.Requests.Persons;
 using Api.Models;
-using Api.Requests.Persons;
-using Application.Commands.Persons;
-using Application.Common.Models;
-using Application.Interfaces.Services;
+using Application.Features.Persons.Commands.Create;
+using Application.Features.Persons.Commands.Delete;
+using Application.Features.Persons.Commands.Update;
+using Application.Features.Persons.Queries.GetById;
+using Application.Features.Persons.Queries.PagedSearch;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ApiPersonResponse = Api.Responses.Persons.PersonResponse;
+using ApiPersonResponse = Api.Contracts.Responses.Persons.PersonResponse;
 
 namespace Api.Controllers
 {
@@ -16,17 +19,17 @@ namespace Api.Controllers
     {
         private readonly ILogger<PersonsController> _logger;
         private readonly ILinkBuilder _linkBuilder;
-        private readonly IPersonService _personService;
+        private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
         public PersonsController(
             ILogger<PersonsController> logger,
-            IPersonService personService,
+            IMediator mediator,
             IMapper mapper,
             ILinkBuilder linkBuilder)
         {
             _logger = logger;
-            _personService = personService;
+            _mediator = mediator;
             _mapper = mapper;
             _linkBuilder = linkBuilder;
         }
@@ -35,7 +38,9 @@ namespace Api.Controllers
         public async Task<ActionResult<ApiPersonResponse>> GetAsync([FromRoute] string id)
         {
             _logger.LogInformation("Retrieving person with ID {Id}.", id);
-            var result = await _personService.GetAsync(id);
+            var query = _mapper.Map<GetPersonByIdQuery>(id);
+
+            var result = await _mediator.Send(query);
 
             if (result.IsFailure)
                 return ToActionResult(result);
@@ -47,20 +52,12 @@ namespace Api.Controllers
         }
 
         [HttpGet(Name = "Paged")]
-        public async Task<ActionResult<PagedResponse<ApiPersonResponse>>> GetPagedAsync(SearchParamsQuery query)
+        public async Task<ActionResult<PagedResponse<ApiPersonResponse>>> GetPagedAsync(SearchParamsQuery searchParams)
         {
             _logger.LogInformation("Retrieving all persons from databse.");
+            var query = _mapper.Map<PagedSearchQuery>(searchParams);
 
-            var searchParams = new SearchParams
-            {
-                PageNumber = query.PageNumber,
-                PageSize = query.PageSize,
-                SearchTerm = query.SearchTerm,
-                SortBy = query.SortBy,
-                SortDescending = query.SortDescending
-            };
-            
-            var result = await _personService.SearchPagedAsync(searchParams);
+            var result = await _mediator.Send(query);
 
             if (result.IsFailure)
                 return ToActionResult(result);
@@ -92,7 +89,7 @@ namespace Api.Controllers
             _logger.LogInformation("Creating new person with name: {Name}", request.Name);
             var command = _mapper.Map<CreatePersonCommand>(request);
 
-            var result = await _personService.CreateAsync(command);
+            var result = await _mediator.Send(command);
 
             if (result.IsFailure)
                 return ToActionResult(result);
@@ -116,7 +113,7 @@ namespace Api.Controllers
 
             var command = _mapper.Map<UpdatePersonCommand>(request);
 
-            var result = await _personService.UpdateAsync(command);
+            var result = await _mediator.Send(command);
 
             if (result.IsFailure)
                 return ToActionResult(result);
@@ -131,13 +128,15 @@ namespace Api.Controllers
         public async Task<ActionResult> DeleteAsync([FromRoute] string id)
         {
             _logger.LogInformation("Deleting person with ID {Id}", id);
-            var result = await _personService.DeleteAsync(id);
+            var command = _mapper.Map<DeletePersonCommand>(id);
+
+            var result = await _mediator.Send(command);
 
             if (result.IsFailure)
                 return ToActionResult(result);
 
             _logger.LogInformation("Person with ID {Id} deleted successfully.", id);
-            return NoContent();
+            return ToActionResult(result);
         }
     }
 }

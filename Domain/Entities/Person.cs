@@ -25,14 +25,13 @@ namespace Domain.Entities
         public static Person Create(
             string name,
             string cpfNumber,
-            DateTimeOffset cpfBirthDate,
+            DateTimeOffset birthDate,
             DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            DateTimeOffset rgBirthDate,
-            InssuingAuthority issuingAuthority)
+            IssuingAuthority issuingAuthority)
         {
-            var cpf = new Cpf(cpfNumber, cpfBirthDate, cpfRegistrationDate);
-            var rg = new Rg(rgNumber, rgBirthDate, issuingAuthority);
+            var cpf = new Cpf(cpfNumber, birthDate, cpfRegistrationDate);
+            var rg = new Rg(rgNumber, birthDate, issuingAuthority);
 
             return new Person(name, cpf, rg);
         }

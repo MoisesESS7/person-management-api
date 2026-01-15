@@ -1,9 +1,6 @@
-﻿using Application.Commands.Persons;
-using Application.Common.Response.Auditables;
-using Application.Common.Response.Documents;
-using Application.Common.Response.Persons;
+﻿using Application.Features.Persons.Commands;
+using Application.Features.Persons.Responses;
 using Domain.Entities;
-using Domain.ValueObjects;
 
 namespace Application.Mappers
 {
@@ -13,38 +10,29 @@ namespace Application.Mappers
         {
             return Person.Create(
                 input.Name,
-                input.Cpf.Number,
-                input.Cpf.BirthDate,
-                input.Cpf.RegistrationDate,
-                input.Rg.Number,
-                input.Rg.BirthDate,
-                input.Rg.IssuingAuthority);
+                input.CpfNumber,
+                input.BirthDate,
+                input.CpfRegistrationDate,
+                input.RgNumber,
+                input.RgIssuingAuthority);
         }
 
         public static PersonResponse ToPersonResponse(Person person)
         {
-            var cpfResponse = CreateCpfResponse(person.Cpf);
-            var rgResponse = CreateRgResponse(person.Rg);
-            var auditable = CreateAuditable(person.Auditable);
-
-            return new (
-                person.Id,
-                auditable,
+            return new PersonResponse(
+                person.Id ?? string.Empty,
                 person.Name,
                 person.Age,
-                cpfResponse,
-                rgResponse);
+                person.Rg.BirthDate,
+                person.Cpf.Number,
+                person.Cpf.RegistrationDate,
+                person.Rg.Number,
+                person.Rg.IssuingAuthority,
+                person.Auditable.CreatedAt,
+                person.Auditable.UpdatedAt,
+                person.Auditable.DeletedAt);
         }
 
         public static IList<PersonResponse> ToListPersonResponse(IEnumerable<Person> persons) => [.. persons.Select(ToPersonResponse)];
-
-        private static CpfResponse CreateCpfResponse(Cpf cpf) =>
-            new(cpf.Number, cpf.BirthDate, cpf.RegistrationDate);
-
-        private static RgResponse CreateRgResponse(Rg rg) =>
-            new(rg.Number, rg.BirthDate, rg.IssuingAuthority);
-
-        private static AuditableEntityResponse CreateAuditable(AuditableEntity auditable) =>
-            new(auditable.CreatedAt, auditable.UpdatedAt, auditable.DeletedAt);
     }
 }
