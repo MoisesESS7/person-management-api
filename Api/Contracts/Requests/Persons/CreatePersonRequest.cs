@@ -5,19 +5,19 @@ namespace Api.Contracts.Requests.Persons
     public class CreatePersonRequest
     {
         public string Name { get; private set; }
-        public DateTime BirthDate { get; private set; }
+        public DateTimeOffset BirthDate { get; private set; }
         public string CpfNumber { get; private set; }
-        public DateTime CpfRegistrationDate { get; private set; }
+        public DateTimeOffset CpfRegistrationDate { get; private set; }
         public string RgNumber { get; private set; }
-        public InssuingAuthority RgIssuingAuthority { get; private set; }
+        public IssuingAuthority RgIssuingAuthority { get; private set; }
 
         public CreatePersonRequest(
             string name,
-            DateTime birthDate,
+            DateTimeOffset birthDate,
             string cpfNumber,
-            DateTime cpfRegistrationDate,
+            DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            InssuingAuthority rgIssuingAuthority)
+            IssuingAuthority rgIssuingAuthority)
         {
             Name = name;
             BirthDate = birthDate;
