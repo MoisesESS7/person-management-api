@@ -13,7 +13,7 @@ namespace Application.Features.Persons.Commands.Create
             string cpfNumber,
             DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            InssuingAuthority rgIssuingAuthority)
+            IssuingAuthority rgIssuingAuthority)
             : base(name, birthDate, cpfNumber, cpfRegistrationDate, rgNumber, rgIssuingAuthority)
         {
         }

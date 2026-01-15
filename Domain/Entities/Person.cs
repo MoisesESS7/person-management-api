@@ -28,7 +28,7 @@ namespace Domain.Entities
             DateTimeOffset birthDate,
             DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            InssuingAuthority issuingAuthority)
+            IssuingAuthority issuingAuthority)
         {
             var cpf = new Cpf(cpfNumber, birthDate, cpfRegistrationDate);
             var rg = new Rg(rgNumber, birthDate, issuingAuthority);

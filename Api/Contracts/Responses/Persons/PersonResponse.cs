@@ -14,7 +14,7 @@ namespace Api.Contracts.Responses.Persons
         public string CpfNumber { get; private set; }
         public DateTimeOffset CpfRegistrationDate { get; private set; }
         public string RgNumber { get; private set; }
-        public InssuingAuthority RgIssuingAuthority { get; private set; }
+        public IssuingAuthority RgIssuingAuthority { get; private set; }
 
         public PersonResponse(
             string id,
@@ -27,7 +27,7 @@ namespace Api.Contracts.Responses.Persons
             string cpfNumber,
             DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            InssuingAuthority rgIssuingAuthority)
+            IssuingAuthority rgIssuingAuthority)
         {
             Id = id;
             Name = name;

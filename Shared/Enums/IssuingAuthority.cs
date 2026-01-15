@@ -1,6 +1,6 @@
 ﻿namespace Shared.Enums
 {
-    public enum InssuingAuthority
+    public enum IssuingAuthority
     {
         SSP_AC,
         SSP_AL,

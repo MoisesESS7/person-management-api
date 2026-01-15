@@ -9,7 +9,7 @@ namespace Application.Features.Persons.Commands
         public string CpfNumber { get; private set; }
         public DateTimeOffset CpfRegistrationDate { get; private set; }
         public string RgNumber { get; private set; }
-        public InssuingAuthority RgIssuingAuthority { get; private set; }
+        public IssuingAuthority RgIssuingAuthority { get; private set; }
 
         protected PersonCommandBase(
             string name,
@@ -17,7 +17,7 @@ namespace Application.Features.Persons.Commands
             string cpfNumber,
             DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            InssuingAuthority rgIssuingAuthority)
+            IssuingAuthority rgIssuingAuthority)
         {
             Name = name;
             BirthDate = birthDate;

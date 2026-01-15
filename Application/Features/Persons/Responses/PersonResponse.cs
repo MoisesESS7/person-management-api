@@ -10,7 +10,7 @@ namespace Application.Features.Persons.Responses
         public string CpfNumber { get; private set; }
         public DateTimeOffset CpfRegistrationDate { get; private set; }
         public string RgNumber { get; private set; }
-        public InssuingAuthority RgIssuingAuthority { get; private set; }
+        public IssuingAuthority RgIssuingAuthority { get; private set; }
 
         public PersonResponse(
             string id,
@@ -20,7 +20,7 @@ namespace Application.Features.Persons.Responses
             string cpfNumber,
             DateTimeOffset cpfRegistrationDate,
             string rgNumber,
-            InssuingAuthority rgIssuingAuthority,
+            IssuingAuthority rgIssuingAuthority,
             DateTimeOffset createdAt,
             DateTimeOffset? updatedAt,
             DateTimeOffset? deletedAt)

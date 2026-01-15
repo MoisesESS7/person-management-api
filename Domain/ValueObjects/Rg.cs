@@ -6,9 +6,9 @@ namespace Domain.ValueObjects
 {
     public sealed class Rg : Document
     {
-        public InssuingAuthority IssuingAuthority { get; private set; }
+        public IssuingAuthority IssuingAuthority { get; private set; }
 
-        public Rg(string number, DateTimeOffset birthDate, InssuingAuthority issuingAuthority) : base(number, birthDate)
+        public Rg(string number, DateTimeOffset birthDate, IssuingAuthority issuingAuthority) : base(number, birthDate)
         {
             IssuingAuthority = issuingAuthority;
             Validation();
