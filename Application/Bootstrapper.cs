@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Application.Common.Validations.Behaviors;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +14,8 @@ namespace Application
             cfg.RegisterServicesFromAssembly(typeof(Bootstrapper).Assembly));
 
             service.AddValidatorsFromAssembly(typeof(Bootstrapper).Assembly);
+
+            service.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
     }
 }
