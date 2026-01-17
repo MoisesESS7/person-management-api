@@ -9,6 +9,5 @@ namespace Application.Exceptions
         public override string Type => "https://httpstatuses.com/404";
 
         public PageNotFoundException(string message) : base(message) {}
-        public PageNotFoundException(IEnumerable<string> errors, string message) : base(errors, message) {}
     }
 }
