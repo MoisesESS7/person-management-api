@@ -70,17 +70,17 @@ namespace Infrastructure.Data.Common
                 if (ex is MongoWriteException || ex is MongoWriteConcernException)
                     throw new DatabaseWriteException("The MongoDB operation write failed.", ex);
 
-                throw new BaseAppException("A MongoDB error occurred.", ex);
+                throw new TechnicalException("A MongoDB error occurred.", ex);
             }
             catch (TimeoutException ex)
             {
-                _logger.LogWarning(ex, "Timeout in operation {Operation}", operationName);
+                _logger.LogError(ex, "Timeout in operation {Operation}", operationName);
                 throw new DatabaseTimeoutException("The database operation timed out.", ex);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unexpected error in operation {Operation}", operationName);
-                throw new BaseAppException("Unexpected error in repository layer.", ex);
+                throw new TechnicalException("Unexpected error in repository layer.", ex);
             }
         }        
     }
