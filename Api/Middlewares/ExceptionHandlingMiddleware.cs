@@ -52,16 +52,27 @@ namespace Api.Middlewares
                     errors: errors
                 );
             }
-            else if (exception is BaseAppException appException)
+            else if (exception is BusinessException businessException)
             {
-                _logger.LogWarning(exception, "Handled exception [{TraceId}]", traceId);
+                _logger.LogWarning("Handled exception [{TraceId}] - {Errors}", traceId, businessException.Errors);
                 problem = CreateProblemDetails(
-                    appException.Type,
-                    appException.Title,
-                    appException.Message,
-                    appException.StatusCode,
+                    businessException.Type,
+                    businessException.Title,
+                    businessException.Message,
+                    businessException.StatusCode,
                     context.Request.Path,
-                    appException.Errors
+                    businessException.Errors
+                );
+            }
+            else if (exception is TechnicalException technicalException)
+            {
+                _logger.LogError(exception, "Technical error [{TraceId}]", traceId);
+                problem = CreateProblemDetails(
+                    technicalException.Type,
+                    technicalException.Title,
+                    technicalException.Message,
+                    technicalException.StatusCode,
+                    context.Request.Path
                 );
             }
             else
