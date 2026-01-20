@@ -30,13 +30,13 @@ namespace Api
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "PDI - Implementing CRUD operations with MongoDB and creating GCP PUB/SUB",
+                    Title = "Person Management API",
                     Version = "v1",
-                    Description = "Implement CRUD operations with MongoDB by creating indexes and aggregation, best practices with S.O.L.I.D (SRP, OCP), and GCP PUB/SUB.",
+                    Description = "Enterprise - grade REST API for managing person data, exposing CRUD operations designed with Clean Architecture principles, MongoDB persistence, and asynchronous messaging via Google Cloud Pub / Sub",
                     Contact = new OpenApiContact
                     {
-                        Name = "My name goes here - .NET Developer",
-                        Email = "exemple@outlook.com",
+                        Name = "Moisés do Espírito Santo Silva",
+                        Email = "moisessilvagsp@outlook.com",
                         Url = TryCreateUri(configuration["ContactUrl"])
                     }
                 });
