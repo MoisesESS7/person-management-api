@@ -1,131 +1,268 @@
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge)
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![CSharp](https://img.shields.io/badge/C%23-12-239120?style=for-the-badge&logo=csharp&logoColor=white)
+![Architecture](https://img.shields.io/badge/Architecture-Clean%20Architecture-blue?style=for-the-badge)
+![CQRS](https://img.shields.io/badge/Pattern-CQRS-informational?style=for-the-badge)
+![MediatR](https://img.shields.io/badge/MediatR-Enabled-orange?style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/MongoDB-Integrated-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Swagger](https://img.shields.io/badge/OpenAPI-Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-Planned-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-lightgrey?style=for-the-badge&logo=githubactions)
 
-Person Management API
+---
 
-API RESTful desenvolvida em .NET 8, aplicando Clean Architecture, CQRS e boas práticas amplamente adotadas no mercado. O projeto demonstra uma implementação profissional de operações CRUD sobre a entidade Person, com foco em separação de responsabilidades, robustez, escalabilidade e manutenibilidade.
+## Person Service API
 
-Esta API foi pensada como um projeto de portfólio com nível profissional, refletindo padrões reais utilizados em times .NET modernos.
+API **RESTful** desenvolvida em **.NET 8**, aplicando **Clean Architecture**, **CQRS** e **boas práticas amplamente adotadas no mercado**.  
+O projeto demonstra uma implementação **profissional** de operações **CRUD** sobre a entidade **Person**, com foco em **separação de responsabilidades**, **robustez**, **escalabilidade** e **manutenibilidade**.
 
-📌 Visão Geral
+Este repositório representa um **portfólio técnico profissional**, refletindo **padrões reais utilizados em times .NET modernos** e refatorado progressivamente para assumir responsabilidades claras de um **microsserviço**.
 
-A solução contempla validações de regras de negócio, logging estruturado, tratamento de exceções em múltiplas camadas e padrões arquiteturais modernos, evidenciando maturidade técnica no desenvolvimento de APIs RESTful.
+---
 
-Principais objetivos do projeto:
+## 📌 Visão Geral
 
-Demonstrar domínio de arquitetura limpa em .NET
+A solução contempla **validações de regras de negócio**, **logging estruturado**, **tratamento global de exceções** e **padrões arquiteturais modernos**, evidenciando **maturidade técnica** no desenvolvimento de **APIs RESTful**.
 
-Aplicar boas práticas de design e organização de código
+**Objetivos do projeto:**
 
-Garantir baixo acoplamento e alta coesão entre camadas
+- Aplicar **Clean Architecture** de forma pragmática
+- Garantir **baixo acoplamento** e **alta coesão**
+- Demonstrar **boas práticas de mercado em .NET**
+- Preparar a aplicação para **crescimento, testes e automação**
 
-Preparar a aplicação para crescimento e evolução
+---
 
-🏗️ Arquitetura
+## 💼 Perfil Profissional
 
-O projeto segue os princípios da Clean Architecture, com responsabilidades bem definidas entre as camadas:
+Experiência prática aplicada neste projeto:
 
-API: Camada de apresentação (Controllers, DTOs, Middlewares, Swagger)
+- **ASP.NET Core (.NET 8)**
+- **APIs RESTful** orientadas a domínio
+- **Clean Architecture** e **CQRS**
+- **MediatR** para orquestração de casos de uso
+- **MongoDB** como banco NoSQL
+- **FluentValidation**, **logging estruturado** e **tratamento de exceções**
+- Preparação para **microsserviços**, **CI/CD** e **Docker**
 
-Application: Casos de uso, Commands, Queries, Handlers, validações e regras de aplicação
+---
 
-Domain: Entidades, Value Objects, regras de negócio e contratos
+## 🏗 Decisões de Arquitetura e Nomeação
 
-Infrastructure: Persistência, integrações externas e implementações técnicas
+O projeto foi estruturado para atuar como serviço independente dentro de um **ecossistema distribuído**, seguindo os princípios de **Clean Architecture** e **CQRS**.
 
-Shared: Exceções, resultados, utilitários e contratos compartilhados
+Todos os projetos utilizam o prefixo **`PersonService`**, tornando o **limite do serviço explícito** e alinhado às práticas reais de **microsserviços no ecossistema .NET**.
 
-Além disso, a aplicação utiliza:
+---
 
-CQRS para separação de leitura e escrita
+### Por que `PersonService`?
 
-MediatR para desacoplamento entre camadas
+- Representa uma **capacidade de negócio**
+- Unidade clara de:
+  - **deploy**
+  - **versionamento**
+  - **CI/CD**
+  - **testes**
+- Recursos da API permanecem no plural (ex.: `/api/persons`)
 
-FluentValidation para validações de entrada
+---
 
-✅ Funcionalidades Implementadas
+## 📁 Estrutura da Solução
 
-Arquitetura em camadas bem definidas (API, Application, Domain, Infrastructure e Shared)
+```text
+PersonService.sln
+├── src
+│   ├── PersonService.Api
+│   ├── PersonService.Application
+│   ├── PersonService.Domain
+│   ├── PersonService.Infra.Data
+│   ├── PersonService.Infra.Ioc
+│   └── PersonService.Shared
+└── tests
+    └── PersonService.Tests
+```
 
-CRUD completo da entidade Person
+Essa estrutura permite extração do serviço para repositório ou pipeline dedicado, sem necessidade de refatoração.
 
-Validação de duplicidade de Nome, CPF e RG
+---
 
-Implementação do Repository Pattern, incluindo:
+## 🏗️ Arquitetura
 
-RepositoryExecutor
+O projeto segue os princípios da Clean Architecture, com responsabilidades bem definidas:
 
-Políticas de retry com Polly
+- **PersonService.API:** Controllers, DTOs, Middlewares e Swagger
 
-Logging estruturado com ILogger para rastreabilidade de operações
+- **PersonService.Application:** Commands, Queries, Handlers, validações e regras de aplicação
 
-Tratamento global de exceções via Middleware, seguindo o padrão RFC 7807 (ProblemDetails)
+- **PersonService.Domain:** Entidades, Value Objects, regras de negócio e contratos
 
-Integração com MongoDB, incluindo:
+- **PersonService.Infra.Data:** Persistência, integrações externas e implementações técnicas
 
-Índices únicos
+- **PersonService.Infra.Ioc:** Injeção de dependências e configuração de serviços
 
-Convenções globais
+- **PersonService.Shared:** Exceções, Results, utilitários e contratos compartilhados
 
-AutoMapper configurado para mapear entre:
+---
 
-Requests → Commands
+## 🧠 Tecnologias e padrões aplicados
 
-Commands → Domínio
+- **CQRS** (separação de leitura e escrita)
 
-Domínio → Responses
+- **MediatR** (desacoplamento entre camadas)
 
-Swagger / OpenAPI integrado para documentação e testes dos endpoints
+- **FluentValidation**
 
-Arquivos de HTTP Requests organizados para testes manuais
+- **AutoMapper**
 
-Tests/Requests/Persons.http
+- **ILogger / Logging estruturado**
 
-Paginação com retorno de links de navegação entre páginas
+- **Polly**
 
-Uso do padrão Result para controle de fluxos esperados e regras de negócio
+- **RFC 7807 (Problem Details)**
 
-Implementação de CQRS com MediatR e FluentValidation
+---
 
-🔜 Funcionalidades Planejadas
+## 🧪 Estratégia de Testes
 
-Testes unitários com xUnit
+A estratégia de testes foi pensada para ambientes reais de produção, contemplando testes unitários e de integração.
 
-Versionamento de API
+**Estrutura planejada de testes:**
 
-Autenticação e autorização
+```text
+tests
+├── PersonService.Tests
+│   ├── Unit
+│   │   ├── Domain
+│   │   ├── Application
+│   │   └── Api
+│   ├── Integration
+│   │   └── Api
+│   └── Common
+│       ├── Builders
+│       ├── Fixtures
+│       └── Fakes
 
-Docker e Docker Compose
+```
 
-Pipeline de CI/CD com GitHub Actions
+- **Testes Unitários:** regras de negócio, handlers, validações
 
-Implementação de HATEOAS para uma API RESTful mais aderente a padrões de mercado
+- **Testes de Integração:** API + banco de dados
 
-Mensageria e integração com Google Cloud Pub/Sub
+- **Fixtures e Builders:** isolamento e reutilização
 
-🧪 Testes
+- **xUnit:** como framework de testes
 
-Atualmente, o projeto conta com arquivos .http para testes manuais dos endpoints. A implementação de testes automatizados com xUnit faz parte do roadmap.
+Arquivos .http também são utilizados para testes manuais e exploratórios.
 
-📄 Documentação
+---
 
-A documentação da API está disponível via Swagger, permitindo:
+## 🚀 CI/CD & Docker (Planejado)
 
-Visualização dos endpoints
+A aplicação está preparada para automação completa de build, testes e deploy.
 
-Testes interativos
+**Planejamento de CI/CD:**
 
-Análise dos contratos de request/response
+- GitHub Actions
 
-👤 Autor
+**Pipelines separados para:**
 
-Moisés do Espírito Santo Silva
-.NET Developer
+- Build
 
-LinkedIn: https://www.linkedin.com/in/moises-do-espirito-santo-silva/
+- Testes
 
-📎 Observações
+- Docker
 
-Este projeto foi desenvolvido com foco em boas práticas de mercado, servindo tanto como estudo avançado quanto como projeto de portfólio profissional, demonstrando organização, arquitetura e qualidade de código esperadas em ambientes reais de desenvolvimento .NET.
+**Execução automática de:**
 
+- Testes unitários
 
+- Testes de integração
 
+- Análise de build
+
+**Docker & Containers:**
+
+- Dockerfile para a API
+
+**Docker Compose para:**
+
+- API
+
+- MongoDB
+
+**Preparação para ambientes:**
+
+- dev
+
+- staging
+
+- production
+
+Essa abordagem facilita deploy contínuo, observabilidade e escalabilidade.
+
+---
+
+## ✅ Funcionalidades Implementadas
+
+- Operações essenciais de gestão da entidade Person
+
+- Validação de duplicidade de Nome, CPF e RG
+
+- Repository Pattern com RepositoryExecutor
+
+- Retry com Polly
+
+- Logging estruturado com ILogger
+
+- Tratamento global de exceções (RFC 7807)
+
+- Integração com MongoDB
+
+- AutoMapper configurado
+
+- Swagger / OpenAPI
+
+- Paginação com links de navegação
+
+- Uso do padrão Result
+
+---
+
+## 🔜 Funcionalidades Planejadas
+
+- Testes automatizados (unitários e integração)
+
+- Versionamento de API
+
+- Autenticação e autorização
+
+- Docker e Docker Compose
+
+- CI/CD com GitHub Actions
+
+- Implementação de HATEOAS
+
+- Mensageria com Google Cloud Pub/Sub
+
+---
+
+## 📦 Requisitos
+
+- .NET SDK 8+
+- MongoDB
+- Git
+
+---
+
+## 👤 Autor
+
+**Moisés do Espírito Santo Silva**  
+**.NET Backend Developer**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/moises-do-espirito-santo-silva/)
+
+---
+
+## 📎 Observações
+
+Este projeto demonstra práticas reais de mercado aplicadas ao desenvolvimento de APIs .NET, com foco em arquitetura, organização e qualidade de código.
