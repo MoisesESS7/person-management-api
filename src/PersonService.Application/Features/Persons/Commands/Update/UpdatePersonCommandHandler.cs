@@ -1,12 +1,12 @@
-﻿using Application.Features.Persons.Responses;
-using Application.Interfaces.Repositories;
-using Application.Mappers;
-using Domain.Entities;
+﻿using PersonService.Application.Features.Persons.Responses;
+using PersonService.Application.Interfaces.Repositories;
+using PersonService.Application.Mappers;
+using PersonService.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Commands.Update
+namespace PersonService.Application.Features.Persons.Commands.Update
 {
     internal sealed class UpdatePersonCommandHandler : IRequestHandler<UpdatePersonCommand, ResultOfT<PersonResponse>>
     {

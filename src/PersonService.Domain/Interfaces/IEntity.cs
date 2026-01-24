@@ -1,4 +1,4 @@
-﻿namespace Domain.Interfaces
+﻿namespace PersonService.Domain.Interfaces
 {
     public interface IEntity<T>
     {

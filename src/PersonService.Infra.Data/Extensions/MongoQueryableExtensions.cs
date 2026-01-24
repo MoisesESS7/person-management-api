@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Reflection;
 
-namespace Infrastructure.Data.Extensions
+namespace PersonService.Infra.Data.Extensions
 {
     public static class MongoQueryableExtensions
     {

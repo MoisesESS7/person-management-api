@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Exceptions;
-using Api.Utils;
+using PersonService.Shared.Exceptions;
+using PersonService.Api.Utils;
 using System.Diagnostics;
 using FluentValidation;
 
-namespace Api.Middlewares
+namespace PersonService.Api.Middlewares
 {
     public sealed class ExceptionHandlingMiddleware
     {

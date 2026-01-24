@@ -1,6 +1,6 @@
-﻿using Shared.Exceptions;
+﻿using PersonService.Shared.Exceptions;
 
-namespace Domain.Exceptions.Persons
+namespace PersonService.Domain.Exceptions.Persons
 {
     public class PersonValidationException : BusinessException
     {

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Application.Features.Persons.Queries.PagedSearch
+namespace PersonService.Application.Features.Persons.Queries.PagedSearch
 {
     public sealed class PagedSearchQueryValidator : AbstractValidator<PagedSearchQuery>
     {

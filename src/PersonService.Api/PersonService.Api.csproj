@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Infrastructure.Ioc\Infrastructure.Ioc.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\PersonService.Application\PersonService.Application.csproj" />
+    <ProjectReference Include="..\PersonService.Infra.Ioc\PersonService.Infra.Ioc.csproj" />
+    <ProjectReference Include="..\PersonService.Shared\PersonService.Shared.csproj" />
   </ItemGroup>
 
 </Project>

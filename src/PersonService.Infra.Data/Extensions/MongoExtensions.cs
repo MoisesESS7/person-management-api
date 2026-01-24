@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
-using Domain.Attributes;
+using PersonService.Domain.Attributes;
 
-namespace Infrastructure.Data.Extensions
+namespace PersonService.Infra.Data.Extensions
 {
     public static class MongoExtensions
     {

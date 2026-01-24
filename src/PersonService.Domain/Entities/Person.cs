@@ -1,9 +1,9 @@
-﻿using Domain.Attributes;
-using Domain.Exceptions.Persons;
-using Domain.ValueObjects;
-using Shared.Enums;
+﻿using PersonService.Domain.Attributes;
+using PersonService.Domain.Exceptions.Persons;
+using PersonService.Domain.ValueObjects;
+using PersonService.Shared.Enums;
 
-namespace Domain.Entities
+namespace PersonService.Domain.Entities
 {
     [BsonCollection("persons")]
     public class Person : Entity<string>

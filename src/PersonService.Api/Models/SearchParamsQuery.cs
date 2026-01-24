@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Models
+namespace PersonService.Api.Models
 {
     public sealed class SearchParamsQuery
     {

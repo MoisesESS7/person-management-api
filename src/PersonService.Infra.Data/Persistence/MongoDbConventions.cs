@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 
-namespace Infrastructure.Data.Persistence
+namespace PersonService.Infra.Data.Persistence
 {
     public static class MongoDbConventions
     {

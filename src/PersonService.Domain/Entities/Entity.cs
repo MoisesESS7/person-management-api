@@ -1,6 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using PersonService.Domain.Interfaces;
 
-namespace Domain.Entities
+namespace PersonService.Domain.Entities
 {
     public abstract class Entity<T> : IEntity<T>
     {

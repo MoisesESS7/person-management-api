@@ -1,8 +1,8 @@
-﻿using Api.Extensions;
+﻿using PersonService.Api.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Api.Controllers;
+namespace PersonService.Api.Controllers;
 
 [ApiController]
 public abstract class ApiControllerBase : ControllerBase

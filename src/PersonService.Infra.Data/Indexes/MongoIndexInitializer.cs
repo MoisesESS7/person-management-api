@@ -1,8 +1,8 @@
-﻿using Infrastructure.Data.Extensions;
+﻿using PersonService.Infra.Data.Extensions;
 using MongoDB.Driver;
-using Domain.Entities;
+using PersonService.Domain.Entities;
 
-namespace Infrastructure.Data.Indexes
+namespace PersonService.Infra.Data.Indexes
 {
     public static class MongoIndexInitializer
     {

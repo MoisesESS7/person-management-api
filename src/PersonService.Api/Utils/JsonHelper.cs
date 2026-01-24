@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Api.Utils
+namespace PersonService.Api.Utils
 {
     public static class JsonHelper
     {

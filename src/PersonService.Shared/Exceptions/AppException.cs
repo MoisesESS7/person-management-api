@@ -1,4 +1,4 @@
-﻿namespace Shared.Exceptions
+﻿namespace PersonService.Shared.Exceptions
 {
     public abstract class AppException : Exception
     {

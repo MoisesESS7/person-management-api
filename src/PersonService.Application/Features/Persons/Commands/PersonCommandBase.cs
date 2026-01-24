@@ -1,6 +1,6 @@
-﻿using Shared.Enums;
+﻿using PersonService.Shared.Enums;
 
-namespace Application.Features.Persons.Commands
+namespace PersonService.Application.Features.Persons.Commands
 {
     public abstract class PersonCommandBase
     {

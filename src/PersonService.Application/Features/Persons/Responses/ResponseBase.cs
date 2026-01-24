@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Persons.Responses
+﻿namespace PersonService.Application.Features.Persons.Responses
 {
     public abstract class ResponseBase
     {

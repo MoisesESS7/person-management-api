@@ -1,6 +1,6 @@
-﻿using Shared.Enums;
+﻿using PersonService.Shared.Enums;
 
-namespace Application.Features.Persons.Responses
+namespace PersonService.Application.Features.Persons.Responses
 {
     public sealed class PersonResponse : ResponseBase
     {

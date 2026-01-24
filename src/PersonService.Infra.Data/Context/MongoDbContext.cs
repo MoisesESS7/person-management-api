@@ -1,10 +1,10 @@
-﻿using Infrastructure.Data.Extensions;
-using Infrastructure.Data.Indexes;
-using Infrastructure.Data.Persistence;
+﻿using PersonService.Infra.Data.Extensions;
+using PersonService.Infra.Data.Indexes;
+using PersonService.Infra.Data.Persistence;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace Infrastructure.Data.Context
+namespace PersonService.Infra.Data.Context
 {
     public class MongoDbContext : IMongoDbContext
     {

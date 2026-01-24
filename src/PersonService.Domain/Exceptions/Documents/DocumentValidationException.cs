@@ -1,7 +1,7 @@
-﻿using Domain.ValueObjects.Bases;
-using Shared.Exceptions;
+﻿using PersonService.Domain.ValueObjects.Bases;
+using PersonService.Shared.Exceptions;
 
-namespace Domain.Exceptions.Documents
+namespace PersonService.Domain.Exceptions.Documents
 {
     public class DocumentValidationException : BusinessException
     {

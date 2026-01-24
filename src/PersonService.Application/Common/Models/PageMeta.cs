@@ -1,6 +1,6 @@
-﻿using Application.Exceptions;
+﻿using PersonService.Application.Exceptions;
 
-namespace Application.Common.Models
+namespace PersonService.Application.Common.Models
 {
     public sealed class PageMeta
     {

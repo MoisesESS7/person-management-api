@@ -1,8 +1,8 @@
-﻿using Domain.Exceptions.Documents;
-using Domain.ValueObjects.Bases;
-using Shared.Enums;
+﻿using PersonService.Domain.Exceptions.Documents;
+using PersonService.Domain.ValueObjects.Bases;
+using PersonService.Shared.Enums;
 
-namespace Domain.ValueObjects
+namespace PersonService.Domain.ValueObjects
 {
     public sealed class Rg : Document
     {

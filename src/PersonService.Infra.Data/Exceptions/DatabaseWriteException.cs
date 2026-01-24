@@ -1,6 +1,6 @@
-﻿using Shared.Exceptions;
+﻿using PersonService.Shared.Exceptions;
 
-namespace Infrastructure.Data.Exceptions
+namespace PersonService.Infra.Data.Exceptions
 {
     public class DatabaseWriteException : TechnicalException
     {

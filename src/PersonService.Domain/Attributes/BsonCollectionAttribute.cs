@@ -1,4 +1,4 @@
-﻿namespace Domain.Attributes
+﻿namespace PersonService.Domain.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class BsonCollectionAttribute : Attribute

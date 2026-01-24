@@ -1,7 +1,7 @@
-﻿using Application.Common.Validations.Extensions;
+﻿using PersonService.Application.Common.Validations.Extensions;
 using FluentValidation;
 
-namespace Application.Features.Persons.Commands.Update
+namespace PersonService.Application.Features.Persons.Commands.Update
 {
     public sealed class UpdatePersonCommandValidator : AbstractValidator<UpdatePersonCommand>
     {

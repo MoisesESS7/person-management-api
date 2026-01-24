@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Api.Models
+namespace PersonService.Api.Models
 {
     public sealed class PagedResponse<TInput>
     {

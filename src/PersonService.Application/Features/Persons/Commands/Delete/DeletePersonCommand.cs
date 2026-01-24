@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Commands.Delete
+namespace PersonService.Application.Features.Persons.Commands.Delete
 {
     public sealed class DeletePersonCommand : IRequest<Result>
     {

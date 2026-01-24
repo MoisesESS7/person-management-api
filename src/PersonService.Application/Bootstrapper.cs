@@ -1,10 +1,10 @@
-﻿using Application.Common.Validations.Behaviors;
+﻿using PersonService.Application.Common.Validations.Behaviors;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application
+namespace PersonService.Application
 {
     public static class Bootstrapper
     {

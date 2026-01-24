@@ -1,17 +1,17 @@
-﻿using Api.Contracts.Requests.Persons;
-using Api.Models;
-using Application.Common.Models;
-using Application.Features.Persons.Commands.Create;
-using Application.Features.Persons.Commands.Delete;
-using Application.Features.Persons.Commands.Update;
-using Application.Features.Persons.Queries.GetById;
-using Application.Features.Persons.Queries.PagedSearch;
+﻿using PersonService.Api.Contracts.Requests.Persons;
+using PersonService.Api.Models;
+using PersonService.Application.Common.Models;
+using PersonService.Application.Features.Persons.Commands.Create;
+using PersonService.Application.Features.Persons.Commands.Delete;
+using PersonService.Application.Features.Persons.Commands.Update;
+using PersonService.Application.Features.Persons.Queries.GetById;
+using PersonService.Application.Features.Persons.Queries.PagedSearch;
 using AutoMapper;
-using ApiPaginationMeta = Api.Models.PaginationMeta;
-using ApiPersonResponse = Api.Contracts.Responses.Persons.PersonResponse;
-using AppPersonResponse = Application.Features.Persons.Responses.PersonResponse;
+using ApiPaginationMeta = PersonService.Api.Models.PaginationMeta;
+using ApiPersonResponse = PersonService.Api.Contracts.Responses.Persons.PersonResponse;
+using AppPersonResponse = PersonService.Application.Features.Persons.Responses.PersonResponse;
 
-namespace Api.Mappers
+namespace PersonService.Api.Mappers
 {
     public class PersonProfile : Profile
     {

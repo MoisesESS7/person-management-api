@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Shared.Enums;
+using PersonService.Shared.Enums;
 
-namespace Application.Common.Validations.Extensions
+namespace PersonService.Application.Common.Validations.Extensions
 {
     public static class ValidationExtensions
     {

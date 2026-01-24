@@ -1,7 +1,7 @@
-﻿using Application.Common.Validations.Extensions;
+﻿using PersonService.Application.Common.Validations.Extensions;
 using FluentValidation;
 
-namespace Application.Features.Persons.Queries.GetById
+namespace PersonService.Application.Features.Persons.Queries.GetById
 {
     public sealed class GetPersonByIdQueryValidator : AbstractValidator<GetPersonByIdQuery>
     {

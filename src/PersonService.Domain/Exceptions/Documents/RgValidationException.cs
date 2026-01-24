@@ -1,6 +1,6 @@
-﻿using Domain.ValueObjects;
+﻿using PersonService.Domain.ValueObjects;
 
-namespace Domain.Exceptions.Documents
+namespace PersonService.Domain.Exceptions.Documents
 {
     public class RgValidationException : DocumentValidationException
     {

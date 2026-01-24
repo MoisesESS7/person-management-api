@@ -1,4 +1,4 @@
-﻿namespace Api.Models
+﻿namespace PersonService.Api.Models
 {
     public sealed class PaginationLinks
     {

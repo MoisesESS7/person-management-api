@@ -1,8 +1,8 @@
-﻿using Application.Features.Persons.Commands;
-using Application.Features.Persons.Responses;
-using Domain.Entities;
+﻿using PersonService.Application.Features.Persons.Commands;
+using PersonService.Application.Features.Persons.Responses;
+using PersonService.Domain.Entities;
 
-namespace Application.Mappers
+namespace PersonService.Application.Mappers
 {
     public static class Mapper
     {

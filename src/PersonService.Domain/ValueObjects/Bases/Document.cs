@@ -1,6 +1,6 @@
-﻿using Domain.Exceptions.Documents;
+﻿using PersonService.Domain.Exceptions.Documents;
 
-namespace Domain.ValueObjects.Bases
+namespace PersonService.Domain.ValueObjects.Bases
 {
     public abstract class Document
     {

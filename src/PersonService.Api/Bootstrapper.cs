@@ -1,10 +1,10 @@
-﻿using Api.Builders;
-using Api.Mappers;
+﻿using PersonService.Api.Builders;
+using PersonService.Api.Mappers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.OpenApi.Models;
 
-namespace Api
+namespace PersonService.Api
 {
     public static class Bootstrapper
     {
@@ -30,7 +30,7 @@ namespace Api
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Person Management API",
+                    Title = "Person Service API",
                     Version = "v1",
                     Description = "Enterprise - grade REST API for managing person data, exposing CRUD operations designed with Clean Architecture principles, MongoDB persistence, and asynchronous messaging via Google Cloud Pub / Sub",
                     Contact = new OpenApiContact

@@ -1,4 +1,4 @@
-﻿namespace Shared.Enums
+﻿namespace PersonService.Shared.Enums
 {
     public enum IssuingAuthority
     {

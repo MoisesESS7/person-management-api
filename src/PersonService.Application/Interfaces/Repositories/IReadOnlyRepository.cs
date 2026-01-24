@@ -1,7 +1,7 @@
-﻿using Application.Common.Models;
+﻿using PersonService.Application.Common.Models;
 using System.Linq.Expressions;
 
-namespace Application.Interfaces.Repositories
+namespace PersonService.Application.Interfaces.Repositories
 {
     public interface IReadOnlyRepository<TEntity>
     {

@@ -1,14 +1,14 @@
-﻿using Application.Common.Models;
-using Application.Interfaces.Repositories;
-using Domain.Entities;
-using Infrastructure.Data.Common;
-using Infrastructure.Data.Context;
-using Infrastructure.Data.Exceptions;
-using Infrastructure.Data.Extensions;
+﻿using PersonService.Application.Common.Models;
+using PersonService.Application.Interfaces.Repositories;
+using PersonService.Domain.Entities;
+using PersonService.Infra.Data.Common;
+using PersonService.Infra.Data.Context;
+using PersonService.Infra.Data.Exceptions;
+using PersonService.Infra.Data.Extensions;
 using MongoDB.Driver;
 using System.Linq.Expressions;
 
-namespace Infrastructure.Data.Repositories
+namespace PersonService.Infra.Data.Repositories
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : Entity<string>
     {

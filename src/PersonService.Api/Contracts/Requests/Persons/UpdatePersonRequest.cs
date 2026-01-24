@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Api.Contracts.Requests.Persons
+namespace PersonService.Api.Contracts.Requests.Persons
 {
     public class UpdatePersonRequest
     {

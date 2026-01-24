@@ -1,8 +1,8 @@
-﻿using Application.Features.Persons.Responses;
+﻿using PersonService.Application.Features.Persons.Responses;
 using MediatR;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Queries.GetById
+namespace PersonService.Application.Features.Persons.Queries.GetById
 {
     public sealed class GetPersonByIdQuery : IRequest<ResultOfT<PersonResponse>>
     {

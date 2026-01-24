@@ -1,7 +1,7 @@
-﻿using Domain.Exceptions.Documents;
-using Domain.ValueObjects.Bases;
+﻿using PersonService.Domain.Exceptions.Documents;
+using PersonService.Domain.ValueObjects.Bases;
 
-namespace Domain.ValueObjects
+namespace PersonService.Domain.ValueObjects
 {
     public sealed class Cpf : Document
     {

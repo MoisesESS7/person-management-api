@@ -1,6 +1,6 @@
-﻿using Shared.Enums;
+﻿using PersonService.Shared.Enums;
 
-namespace Api.Contracts.Requests.Persons
+namespace PersonService.Api.Contracts.Requests.Persons
 {
     public class CreatePersonRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Models
+﻿namespace PersonService.Application.Common.Models
 {
     public sealed class SearchParams
     {

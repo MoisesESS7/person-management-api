@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Results;
+using PersonService.Shared.Results;
 using System.Diagnostics;
 
-namespace Api.Extensions;
+namespace PersonService.Api.Extensions;
 
 public static class ControllerExtensions
 {

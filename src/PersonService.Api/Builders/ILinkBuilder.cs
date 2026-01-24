@@ -1,6 +1,6 @@
-﻿using Api.Models;
+﻿using PersonService.Api.Models;
 
-namespace Api.Builders
+namespace PersonService.Api.Builders
 {
     public interface ILinkBuilder
     {

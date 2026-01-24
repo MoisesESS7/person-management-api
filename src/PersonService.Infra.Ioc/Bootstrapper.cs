@@ -1,11 +1,11 @@
-﻿using Application.Interfaces.Repositories;
-using Infrastructure.Data.Common;
-using Infrastructure.Data.Context;
-using Infrastructure.Data.Repositories;
+﻿using PersonService.Application.Interfaces.Repositories;
+using PersonService.Infra.Data.Common;
+using PersonService.Infra.Data.Context;
+using PersonService.Infra.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Ioc
+namespace PersonService.Infra.Ioc
 {
     public static class Bootstrapper
     {

@@ -1,13 +1,13 @@
-﻿using Application.Common.Models;
-using Application.Features.Persons.Responses;
-using Application.Interfaces.Repositories;
-using Application.Mappers;
-using Domain.Entities;
+﻿using PersonService.Application.Common.Models;
+using PersonService.Application.Features.Persons.Responses;
+using PersonService.Application.Interfaces.Repositories;
+using PersonService.Application.Mappers;
+using PersonService.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Queries.PagedSearch
+namespace PersonService.Application.Features.Persons.Queries.PagedSearch
 {
     internal sealed class PagedSearchQueryHandler : IRequestHandler<PagedSearchQuery, ResultOfT<PagedResult<PersonResponse>>>
     {

@@ -1,6 +1,6 @@
-﻿using Shared.Exceptions;
+﻿using PersonService.Shared.Exceptions;
 
-namespace Application.Exceptions
+namespace PersonService.Application.Exceptions
 {
     public class PageNotFoundException : BusinessException
     {

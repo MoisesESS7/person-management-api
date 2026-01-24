@@ -1,4 +1,4 @@
-﻿namespace Shared.Results
+﻿namespace PersonService.Shared.Results
 {
     public static class Errors
     {

@@ -1,9 +1,9 @@
-﻿using Application.Common.Models;
-using Application.Features.Persons.Responses;
+﻿using PersonService.Application.Common.Models;
+using PersonService.Application.Features.Persons.Responses;
 using MediatR;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Queries.PagedSearch
+namespace PersonService.Application.Features.Persons.Queries.PagedSearch
 {
     public sealed class PagedSearchQuery : IRequest<ResultOfT<PagedResult<PersonResponse>>>
     {

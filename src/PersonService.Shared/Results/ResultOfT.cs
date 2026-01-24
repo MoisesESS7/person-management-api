@@ -1,4 +1,4 @@
-﻿namespace Shared.Results
+﻿namespace PersonService.Shared.Results
 {
     public sealed class ResultOfT<T> : Result
     {

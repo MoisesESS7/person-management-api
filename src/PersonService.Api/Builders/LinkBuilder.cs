@@ -1,9 +1,9 @@
-﻿using Api.Models;
+﻿using PersonService.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 
-namespace Api.Builders
+namespace PersonService.Api.Builders
 {
     public sealed class LinkBuilder : ILinkBuilder
     {

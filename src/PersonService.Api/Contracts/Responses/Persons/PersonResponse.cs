@@ -1,6 +1,6 @@
-﻿using Shared.Enums;
+﻿using PersonService.Shared.Enums;
 
-namespace Api.Contracts.Responses.Persons
+namespace PersonService.Api.Contracts.Responses.Persons
 {
     public class PersonResponse
     {

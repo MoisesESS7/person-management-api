@@ -1,9 +1,9 @@
-﻿using Application.Features.Persons.Responses;
+﻿using PersonService.Application.Features.Persons.Responses;
 using MediatR;
-using Shared.Enums;
-using Shared.Results;
+using PersonService.Shared.Enums;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Commands.Create
+namespace PersonService.Application.Features.Persons.Commands.Create
 {
     public sealed class CreatePersonCommand : PersonCommandBase, IRequest<ResultOfT<PersonResponse>>
     {

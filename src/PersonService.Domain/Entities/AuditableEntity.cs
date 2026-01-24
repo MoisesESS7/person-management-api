@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities
+﻿namespace PersonService.Domain.Entities
 {
     public class AuditableEntity
     {

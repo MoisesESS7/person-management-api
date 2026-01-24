@@ -1,8 +1,8 @@
-﻿using Application.Features.Persons.Responses;
+﻿using PersonService.Application.Features.Persons.Responses;
 using MediatR;
-using Shared.Results;
+using PersonService.Shared.Results;
 
-namespace Application.Features.Persons.Commands.Update
+namespace PersonService.Application.Features.Persons.Commands.Update
 {
     public sealed class UpdatePersonCommand : IRequest<ResultOfT<PersonResponse>>
     {

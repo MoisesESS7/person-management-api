@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using Api;
-using Api.Middlewares;
-using Application;
-using Infrastructure.Ioc;
+using PersonService.Api;
+using PersonService.Api.Middlewares;
+using PersonService.Application;
+using PersonService.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 

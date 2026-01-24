@@ -1,12 +1,12 @@
 ﻿using System.Runtime.CompilerServices;
 using MongoDB.Driver;
-using Infrastructure.Data.Exceptions;
+using PersonService.Infra.Data.Exceptions;
 using Polly;
 using Polly.Retry;
 using Microsoft.Extensions.Logging;
-using Shared.Exceptions;
+using PersonService.Shared.Exceptions;
 
-namespace Infrastructure.Data.Common
+namespace PersonService.Infra.Data.Common
 {
     public class RepositoryExecutor : IRepositoryExecutor
     {

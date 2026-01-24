@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Infrastructure.Data.Common
+namespace PersonService.Infra.Data.Common
 {
     public interface IRepositoryExecutor
     {
