@@ -11,12 +11,11 @@
 
 ---
 
-## Person Service API
+# Person Service API
 
-API **RESTful** desenvolvida em **.NET 8**, aplicando **Clean Architecture**, **CQRS** e **boas práticas amplamente adotadas no mercado**.  
-O projeto demonstra uma implementação **profissional** de operações **CRUD** sobre a entidade **Person**, com foco em **separação de responsabilidades**, **robustez**, **escalabilidade** e **manutenibilidade**.
+Este repositório contém um microsserviço backend desenvolvido em .NET 8, responsável pelo domínio **Person**, aplicando **Clean Architecture**, **CQRS**, **testes unitários com xUnit** e princípios de separação de responsabilidades utilizados em ambientes corporativos.
 
-Este repositório representa um **portfólio técnico profissional**, refletindo **padrões reais utilizados em times .NET modernos** e refatorado progressivamente para assumir responsabilidades claras de um **microsserviço**.
+A solução implementa operações de gestão de pessoas com foco em **robustez**, **manutenibilidade** e **escalabilidade**, refletindo práticas adotadas por times .NET modernos em **sistemas distribuídos**.
 
 ---
 
