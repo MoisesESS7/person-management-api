@@ -1,4 +1,9 @@
-﻿using PersonService.Application.Features.Persons.Commands.Create;
+﻿using FluentAssertions;
+using Moq;
+using PersonService.Application.Features.Persons.Commands.Create;
+using PersonService.Application.Features.Persons.Responses;
+using PersonService.Domain.Entities;
+using PersonService.Shared.Results;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
 {
@@ -12,6 +17,42 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
         {
             _fixture = new CreatePersonCommandFixture();
             _handler = _fixture.CreateHandler();
+        }
+
+        [Fact]
+        public async Task Handle_Should_Create_Person_When_Command_Is_Valid()
+        {
+            //Arrage
+            var id = Guid.NewGuid().ToString();
+
+            _fixture.RepositoryMock
+                .Setup(r => r.AsQueryable())
+                .Returns(Enumerable.Empty<Person>().AsQueryable());
+
+            _fixture.RepositoryMock
+                .Setup(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((Person p, CancellationToken _) =>
+                {
+                    p.Id = id;
+                    return p;
+                });
+
+            var command = new CreatePersonCommandBuilder().Build();
+
+            //Act
+            var result = await _handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            result.IsSuccess.Should().BeTrue();
+            result.Value.Should().NotBeNull();
+            result.Value.Id.Should().Be(id);
+            result.Value.Name.Should().Be(command.Name);
+            result.Value.CpfNumber.Should().Be(command.CpfNumber);
+            result.Value.RgNumber.Should().Be(command.RgNumber);
+            result.Should().BeOfType<ResultOfT<PersonResponse>>();
+
+            _fixture.RepositoryMock
+                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Once);
         }
     }
 }
