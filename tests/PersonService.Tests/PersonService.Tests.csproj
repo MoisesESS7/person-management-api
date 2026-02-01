@@ -28,4 +28,10 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PersonService.Application\PersonService.Application.csproj" />
+    <ProjectReference Include="..\..\src\PersonService.Domain\PersonService.Domain.csproj" />
+    <ProjectReference Include="..\..\src\PersonService.Shared\PersonService.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
