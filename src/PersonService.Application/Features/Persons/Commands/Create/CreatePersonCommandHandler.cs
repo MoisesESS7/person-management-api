@@ -8,7 +8,7 @@ using PersonService.Shared.Results;
 
 namespace PersonService.Application.Features.Persons.Commands.Create
 {
-    internal sealed class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, ResultOfT<PersonResponse>>
+    public sealed class CreatePersonCommandHandler : IRequestHandler<CreatePersonCommand, ResultOfT<PersonResponse>>
     {
         private readonly ILogger<CreatePersonCommandHandler> _logger;
         private readonly IRepository<Person> _personRepository;
