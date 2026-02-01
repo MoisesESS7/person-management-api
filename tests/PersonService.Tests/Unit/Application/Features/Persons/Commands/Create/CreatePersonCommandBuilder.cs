@@ -3,7 +3,7 @@ using PersonService.Shared.Enums;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
 {
-    public class CreatePersonCommandBuilder
+    public sealed class CreatePersonCommandBuilder
     {
         private string _name = "John Doe";
         private DateTimeOffset _birthDate = new(new DateTime(1990, 10, 10));
