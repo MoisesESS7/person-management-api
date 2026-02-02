@@ -8,7 +8,7 @@ using PersonService.Shared.Results;
 
 namespace PersonService.Application.Features.Persons.Commands.Update
 {
-    internal sealed class UpdatePersonCommandHandler : IRequestHandler<UpdatePersonCommand, ResultOfT<PersonResponse>>
+    public sealed class UpdatePersonCommandHandler : IRequestHandler<UpdatePersonCommand, ResultOfT<PersonResponse>>
     {
         private readonly ILogger<UpdatePersonCommandHandler> _logger;
         private readonly IRepository<Person> _personRepository;
