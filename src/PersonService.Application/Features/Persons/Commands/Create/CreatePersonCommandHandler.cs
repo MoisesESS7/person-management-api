@@ -36,19 +36,19 @@ namespace PersonService.Application.Features.Persons.Commands.Create
                 })
                 .FirstOrDefault();
 
-            if (personFromDb?.Name == command.Name)
+            if (!string.IsNullOrWhiteSpace(command.Name) && (personFromDb?.Name == command.Name))
             {
                 _logger.LogWarning("There is already a person with that name: {Name}.", personFromDb.Name);
                 return ResultOfT<PersonResponse>.Fail(Errors.Person.DuplicateName);
             }
 
-            if (personFromDb?.Cpf == command.CpfNumber)
+            if (!string.IsNullOrWhiteSpace(command.CpfNumber) && (personFromDb?.Cpf == command.CpfNumber))
             {
                 _logger.LogWarning("There is already a CPF with that number: {Number}.", personFromDb.Cpf);
                 return ResultOfT<PersonResponse>.Fail(Errors.Cpf.DuplicateNumber);
             }
 
-            if (personFromDb?.Rg == command.RgNumber)
+            if (!string.IsNullOrWhiteSpace(command.RgNumber) && (personFromDb?.Rg == command.RgNumber))
             {
                 _logger.LogWarning("There is already a RG with that number: {Number}.", personFromDb.Rg);
                 return ResultOfT<PersonResponse>.Fail(Errors.Rg.DuplicateNumber);
