@@ -4,6 +4,7 @@ using PersonService.Application.Features.Persons.Commands.Create;
 using PersonService.Application.Features.Persons.Responses;
 using PersonService.Domain.Entities;
 using PersonService.Shared.Results;
+using PersonService.Tests.Common.Builders;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
 {
@@ -53,6 +54,40 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
 
             _fixture.RepositoryMock
                 .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task Handle_Should_Return_Fail_When_Name_Is_Duplicate()
+        {
+            //Arrage
+            var existingPerson = new PersonBuilder()
+                .WithName("John Doe")
+                .Build();
+
+            _fixture.RepositoryMock
+                .Setup(r => r.AsQueryable())
+                .Returns(new List<Person> { existingPerson }.AsQueryable());
+
+            var command = new CreatePersonCommandBuilder()
+                .WithName("John Doe")
+                .Build();
+
+            //Act
+            var result = await _handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            result.IsFailure.Should().BeTrue();
+            result.Errors.Should().HaveCountGreaterThan(0);
+            result.Should().BeOfType<ResultOfT<PersonResponse>>();
+
+            result.Errors.Should()
+                .Contain(e =>
+                    e.Code == Errors.Person.DuplicateName.Code &&
+                    e.Message == Errors.Person.DuplicateName.Message &&
+                    e.Type == Errors.Person.DuplicateName.Type);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
         }
     }
 }
