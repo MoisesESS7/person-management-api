@@ -89,5 +89,41 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
             _fixture.RepositoryMock
                 .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
         }
+
+        [Fact]
+        public async Task Handle_Should_Return_Fail_When_CpfNumber_Is_Duplicate()
+        {
+            //Arrage
+            var existingPerson = new PersonBuilder()
+                .WithName("Bob Brown")
+                .WithCpfNumber("10987654321")
+                .WithRgNumber("987654321")
+                .Build();
+
+            _fixture.RepositoryMock
+                .Setup(r => r.AsQueryable())
+                .Returns(new List<Person> { existingPerson }.AsQueryable());
+
+            var command = new CreatePersonCommandBuilder()
+                .WithCpfNumber("10987654321")
+                .Build();
+
+            //Act
+            var result = await _handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            result.IsFailure.Should().BeTrue();
+            result.Errors.Should().HaveCountGreaterThan(0);
+            result.Should().BeOfType<ResultOfT<PersonResponse>>();
+
+            result.Errors.Should()
+                .Contain(e =>
+                    e.Code == Errors.Cpf.DuplicateNumber.Code &&
+                    e.Message == Errors.Cpf.DuplicateNumber.Message &&
+                    e.Type == Errors.Cpf.DuplicateNumber.Type);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
     }
 }
