@@ -3,6 +3,7 @@ using Moq;
 using PersonService.Application.Features.Persons.Commands.Create;
 using PersonService.Application.Features.Persons.Responses;
 using PersonService.Domain.Entities;
+using PersonService.Shared.Exceptions;
 using PersonService.Shared.Results;
 using PersonService.Tests.Common.Builders;
 
@@ -160,6 +161,32 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
 
             _fixture.RepositoryMock
                 .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task Handle_Should_Throw_TechnicalException_When_Call_CreateAsync_Fail()
+        {
+            //Arrage
+            _fixture.RepositoryMock
+                .Setup(r => r.AsQueryable())
+                .Returns(Enumerable.Empty<Person>().AsQueryable());
+
+            _fixture.RepositoryMock
+                .Setup(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new TechnicalException("Database unavailable"));
+
+            var command = new CreatePersonCommandBuilder().Build();
+
+            //Act
+            Func<Task> act = async () =>
+                await _handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            var exception = await act.Should()
+                .ThrowAsync<TechnicalException>();
+
+            _fixture.RepositoryMock
+                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Once);
         }
     }
 }
