@@ -109,5 +109,38 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
             _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
                 It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Never);
         }
+
+        [Fact]
+        public async Task Handle_Should_Throw_TechnicalException_When_Call_DeleteAsync_Throws()
+        {
+            // Arrange
+            var command = new DeletePersonCommand(Guid.NewGuid().ToString());
+
+            _fixture.RepositoryMock
+                .Setup(repo => repo.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+
+            _fixture.RepositoryMock
+                .Setup(r => r.DeleteAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new TechnicalException("Database unavailable"));
+
+            // Act
+            Func<Task> act = async () =>
+                await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<TechnicalException>();
+
+            _fixture.RepositoryMock.Verify(r => r.ExistsAsync(
+                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+
+            _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
+                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
     }
 }
