@@ -186,7 +186,7 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Update
         }
 
         [Fact]
-        public async Task Handle_Should_Throw_TechnicalException_When_Call_UpdateAsync_Fail()
+        public async Task Handle_Should_Throw_TechnicalException_When_Call_UpdateAsync_Throws()
         {
             // Arrange
             var command = new UpdatePersonCommandBuilder().Build();
@@ -208,7 +208,9 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Update
                 .ReturnsAsync(person);
 
             _fixture.RepositoryMock
-                .Setup(r => r.UpdateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()))
+                .Setup(r => r.UpdateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new TechnicalException("Database unavailable"));
 
             // Act
