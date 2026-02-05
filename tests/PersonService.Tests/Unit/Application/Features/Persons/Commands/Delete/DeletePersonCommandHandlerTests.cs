@@ -2,6 +2,7 @@
 using Moq;
 using PersonService.Application.Features.Persons.Commands.Delete;
 using PersonService.Domain.Entities;
+using PersonService.Shared.Results;
 using System.Linq.Expressions;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
@@ -48,6 +49,37 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
 
             _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
                 It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
-        }   
+        }
+
+        [Fact]
+        public async Task Handle_Should_Return_Fail_When_Person_Not_Found()
+        {
+            // Arrange
+            var command = new DeletePersonCommand(Guid.NewGuid().ToString());
+
+            _fixture.RepositoryMock
+                .Setup(repo => repo.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            // Act
+            var result = await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            result.IsFailure.Should().BeTrue();
+            result.Errors.Should()
+                .Contain(
+                    e => e.Code == Errors.Person.NotFound.Code &&
+                    e.Message == Errors.Person.NotFound.Message &&
+                    e.Type == Errors.Person.NotFound.Type
+                );
+
+            _fixture.RepositoryMock.Verify(r => r.ExistsAsync(
+                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+
+            _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
+                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
     }
 }
