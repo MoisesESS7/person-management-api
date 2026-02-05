@@ -229,6 +229,55 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Update
         }
 
         [Fact]
+        public async Task Handle_Should_Throw_TechnicalException_When_Call_GetAsync_Throws()
+        {
+            // Arrange
+            var command = new UpdatePersonCommandBuilder().Build();
+
+            var person = new PersonBuilder()
+                .WithName(command.Name)
+                .Build();
+
+            _fixture.RepositoryMock
+                .Setup(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            _fixture.RepositoryMock
+                .Setup(r => r.GetAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new TechnicalException("Database unavailable"));
+
+            // Act
+            Func<Task> act = async () =>
+                await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<TechnicalException>();
+
+            _fixture.RepositoryMock
+                .Verify(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.GetAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.UpdateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
+        }
+
+        [Fact]
         public async Task Handle_Should_Throw_TechnicalException_When_Call_UpdateAsync_Throws()
         {
             // Arrange
