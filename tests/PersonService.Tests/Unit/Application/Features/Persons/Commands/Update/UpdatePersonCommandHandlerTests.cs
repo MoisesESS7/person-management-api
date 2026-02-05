@@ -84,5 +84,52 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Update
                     It.IsAny<CancellationToken>()),
                     Times.Once);
         }
+
+        [Fact]
+        public async Task Handle_Should_Return_Fail_When_Name_Is_Duplicate()
+        {
+            // Arrange
+            var command = new UpdatePersonCommandBuilder().Build();
+
+            var person = new PersonBuilder()
+                .WithName(command.Name)
+                .Build();
+
+            _fixture.RepositoryMock
+                .Setup(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+
+            // Act
+            var result = await _handler.Handle(command, CancellationToken.None);
+
+            // Assert
+            result.IsFailure.Should().BeTrue();
+            result.Value.Should().BeNull();
+            result.Errors.Should()
+                .Contain(
+                    e => e.Code == Errors.Person.DuplicateName.Code &&
+                    e.Message == Errors.Person.DuplicateName.Message &&
+                    e.Type == ErrorType.Conflict);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.GetAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.UpdateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
+        }
     }
 }
