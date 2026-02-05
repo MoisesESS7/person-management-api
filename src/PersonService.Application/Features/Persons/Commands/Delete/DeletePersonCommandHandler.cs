@@ -6,7 +6,7 @@ using PersonService.Shared.Results;
 
 namespace PersonService.Application.Features.Persons.Commands.Delete
 {
-    internal sealed class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand, Result>
+    public sealed class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommand, Result>
     {
         private readonly ILogger<DeletePersonCommandHandler> _logger;
         private readonly IRepository<Person> _personRepository;
