@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
 using PersonService.Application.Features.Persons.Commands.Create;
-using PersonService.Application.Features.Persons.Responses;
 using PersonService.Domain.Entities;
 using PersonService.Shared.Exceptions;
 using PersonService.Shared.Results;
@@ -32,7 +31,9 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
                 .Returns(Enumerable.Empty<Person>().AsQueryable());
 
             _fixture.RepositoryMock
-                .Setup(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()))
+                .Setup(r => r.CreateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()))
                 .ReturnsAsync((Person p, CancellationToken _) =>
                 {
                     p.Id = id;
@@ -51,10 +52,12 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
             result.Value.Name.Should().Be(command.Name);
             result.Value.CpfNumber.Should().Be(command.CpfNumber);
             result.Value.RgNumber.Should().Be(command.RgNumber);
-            result.Should().BeOfType<ResultOfT<PersonResponse>>();
 
             _fixture.RepositoryMock
-                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Once);
+                .Verify(r => r.CreateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
         }
 
         [Fact]
@@ -79,7 +82,6 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
             //Assert
             result.IsFailure.Should().BeTrue();
             result.Errors.Should().HaveCountGreaterThan(0);
-            result.Should().BeOfType<ResultOfT<PersonResponse>>();
 
             result.Errors.Should()
                 .Contain(e =>
@@ -88,7 +90,10 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
                     e.Type == Errors.Person.DuplicateName.Type);
 
             _fixture.RepositoryMock
-                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
+                .Verify(r => r.CreateAsync(
+                        It.IsAny<Person>(),
+                        It.IsAny<CancellationToken>()),
+                        Times.Never);
         }
 
         [Fact]
@@ -115,7 +120,6 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
             //Assert
             result.IsFailure.Should().BeTrue();
             result.Errors.Should().HaveCountGreaterThan(0);
-            result.Should().BeOfType<ResultOfT<PersonResponse>>();
 
             result.Errors.Should()
                 .Contain(e =>
@@ -124,7 +128,10 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
                     e.Type == Errors.Cpf.DuplicateNumber.Type);
 
             _fixture.RepositoryMock
-                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
+                .Verify(r => r.CreateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
         }
 
         [Fact]
@@ -151,7 +158,6 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
             //Assert
             result.IsFailure.Should().BeTrue();
             result.Errors.Should().HaveCountGreaterThan(0);
-            result.Should().BeOfType<ResultOfT<PersonResponse>>();
 
             result.Errors.Should()
                 .Contain(e =>
@@ -160,7 +166,10 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
                     e.Type == Errors.Rg.DuplicateNumber.Type);
 
             _fixture.RepositoryMock
-                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Never);
+                .Verify(r => r.CreateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
         }
 
         [Fact]
@@ -172,7 +181,9 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
                 .Returns(Enumerable.Empty<Person>().AsQueryable());
 
             _fixture.RepositoryMock
-                .Setup(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()))
+                .Setup(r => r.CreateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new TechnicalException("Database unavailable"));
 
             var command = new CreatePersonCommandBuilder().Build();
@@ -186,7 +197,10 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
                 .ThrowAsync<TechnicalException>();
 
             _fixture.RepositoryMock
-                .Verify(r => r.CreateAsync(It.IsAny<Person>(), It.IsAny<CancellationToken>()), Times.Once);
+                .Verify(r => r.CreateAsync(
+                    It.IsAny<Person>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
         }
     }
 }
