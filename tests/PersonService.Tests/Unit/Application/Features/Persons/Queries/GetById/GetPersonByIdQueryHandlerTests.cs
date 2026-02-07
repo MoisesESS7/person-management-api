@@ -2,6 +2,7 @@
 using Moq;
 using PersonService.Application.Features.Persons.Queries.GetById;
 using PersonService.Domain.Entities;
+using PersonService.Shared.Exceptions;
 using PersonService.Shared.Results;
 using PersonService.Tests.Common.Builders;
 using System.Linq.Expressions;
@@ -72,6 +73,33 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Queries.GetById
                     e => e.Code == Errors.Person.NotFound.Code &&
                     e.Message == Errors.Person.NotFound.Message &&
                     e.Type == Errors.Person.NotFound.Type);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.GetAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
+        }
+
+        [Fact]
+        public async Task Handle_Should_Throw_TechnicalException_When_GetAsync_Throws()
+        {
+            // Arrange
+            var query = new GetPersonByIdQuery(Guid.NewGuid().ToString());
+
+            _fixture.RepositoryMock
+                .Setup(r => r.GetAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new TechnicalException("Database unavailable"));
+
+            // Act
+            Func<Task> act = async () =>
+                await _handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<TechnicalException>();
 
             _fixture.RepositoryMock
                 .Verify(r => r.GetAsync(
