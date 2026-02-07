@@ -71,7 +71,11 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Queries.PagedSea
 
             _fixture.RepositoryMock
                 .Verify(r => r.SeachPagedAsync(
-                    It.IsAny<SearchParams>(),
+                    It.Is<SearchParams>(p =>
+                        p.SortBy == query.SearchParams.SortBy &&
+                        p.SortDescending == query.SearchParams.SortDescending &&
+                        p.SearchTerm == query.SearchParams.SearchTerm
+                    ),
                     It.IsAny<CancellationToken>()),
                     Times.Once);
         }
