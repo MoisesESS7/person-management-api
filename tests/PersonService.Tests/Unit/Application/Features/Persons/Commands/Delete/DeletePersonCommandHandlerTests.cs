@@ -45,11 +45,17 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
             result.IsSuccess.Should().BeTrue();
             result.Errors.Should().BeEmpty();
 
-            _fixture.RepositoryMock.Verify(r => r.ExistsAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            _fixture.RepositoryMock
+                .Verify(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
 
-            _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            _fixture.RepositoryMock
+                .Verify(r => r.DeleteAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
         }
 
         [Fact]
@@ -76,11 +82,17 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
                     e.Type == Errors.Person.NotFound.Type
                 );
 
-            _fixture.RepositoryMock.Verify(r => r.ExistsAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            _fixture.RepositoryMock
+                .Verify(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
 
-            _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            _fixture.RepositoryMock
+                .Verify(r => r.DeleteAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
         }
 
         [Fact]
@@ -103,11 +115,17 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
             await act.Should()
                 .ThrowAsync<TechnicalException>();
 
-            _fixture.RepositoryMock.Verify(r => r.ExistsAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            _fixture.RepositoryMock
+                .Verify(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
 
-            _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            _fixture.RepositoryMock
+                .Verify(r => r.DeleteAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
         }
 
         [Fact]
@@ -136,11 +154,17 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Delete
             await act.Should()
                 .ThrowAsync<TechnicalException>();
 
-            _fixture.RepositoryMock.Verify(r => r.ExistsAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            _fixture.RepositoryMock
+                .Verify(r => r.ExistsAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
 
-            _fixture.RepositoryMock.Verify(r => r.DeleteAsync(
-                It.IsAny<Expression<Func<Person, bool>>>(), It.IsAny<CancellationToken>()), Times.Once);
+            _fixture.RepositoryMock
+                .Verify(r => r.DeleteAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
         }
     }
 }
