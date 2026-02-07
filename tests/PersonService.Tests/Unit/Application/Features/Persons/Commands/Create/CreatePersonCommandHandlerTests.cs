@@ -8,7 +8,7 @@ using PersonService.Tests.Common.Builders;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Create
 {
-    [Trait("Class", "Unit")]
+    [Trait("Category", "Unit")]
     public sealed class CreatePersonCommandHandlerTests
     {
         private readonly CreatePersonCommandFixture _fixture;

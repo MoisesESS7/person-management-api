@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Commands.Update
 {
-    [Trait("Class", "Unit")]
+    [Trait("Category", "Unit")]
     public sealed class UpdatePersonCommandHandlerTests
     {
         private readonly UpdatePersonCommandFixture _fixture;
