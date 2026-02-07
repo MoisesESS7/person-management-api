@@ -27,7 +27,9 @@ namespace PersonService.Application.Features.Persons.Queries.PagedSearch
 
             var pageMeta = new PageMeta(query.SearchParams.PageNumber, query.SearchParams.PageSize, totalRecords);
 
-            var persons = await _personRepository.SeachPagedAsync(query.SearchParams, cancellationToken);
+            var persons = totalRecords > 0
+                ? await _personRepository.SeachPagedAsync(query.SearchParams, cancellationToken)
+                : [];
 
             var personList = Mapper.ToListPersonResponse(persons);
 
