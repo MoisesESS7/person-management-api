@@ -74,5 +74,44 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Queries.PagedSea
                     It.IsAny<CancellationToken>()),
                     Times.Once);
         }
+
+        [Fact]
+        public async Task Handle_Should_Return_Empty_PagedResult_When_No_Persons_Exist()
+        {
+            // Arrange
+            var query = new PagedSearchQueryBuilder()
+                .WithPageNumber(1)
+                .WithPageSize(2)
+                .Build();
+
+            _fixture.RepositoryMock
+                .Setup(repo => repo.CountAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(0);
+
+            // Act
+            var result = await _handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            result.IsSuccess.Should().BeTrue();
+            result.Value?.Data.Should().BeEmpty();
+            result.Value?.Meta.PageMeta?.PageNumber.Should().Be(query.SearchParams.PageNumber);
+            result.Value?.Meta.PageMeta?.PageSize.Should().Be(query.SearchParams.PageSize);
+            result.Value?.Meta.PageMeta?.TotalPages.Should().Be(0);
+            result.Value?.Meta.PageMeta?.TotalRecords.Should().Be(0);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.CountAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.SeachPagedAsync(
+                    It.IsAny<SearchParams>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
+        }
     }
 }
