@@ -3,6 +3,7 @@ using Moq;
 using PersonService.Application.Common.Models;
 using PersonService.Application.Features.Persons.Queries.PagedSearch;
 using PersonService.Domain.Entities;
+using PersonService.Shared.Exceptions;
 using PersonService.Tests.Common.Builders;
 using System.Linq.Expressions;
 
@@ -100,6 +101,41 @@ namespace PersonService.Tests.Unit.Application.Features.Persons.Queries.PagedSea
             result.Value?.Meta.PageMeta?.PageSize.Should().Be(query.SearchParams.PageSize);
             result.Value?.Meta.PageMeta?.TotalPages.Should().Be(0);
             result.Value?.Meta.PageMeta?.TotalRecords.Should().Be(0);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.CountAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Once);
+
+            _fixture.RepositoryMock
+                .Verify(r => r.SeachPagedAsync(
+                    It.IsAny<SearchParams>(),
+                    It.IsAny<CancellationToken>()),
+                    Times.Never);
+        }
+
+        [Fact]
+        public async Task Handle_Should_Throw_TechnicalException_When_Call_CountAsync_Throws()
+        {
+            // Arrange
+            var query = new PagedSearchQueryBuilder()
+                .WithPageNumber(1)
+                .WithPageSize(2)
+                .Build();
+
+            _fixture.RepositoryMock
+                .Setup(repo => repo.CountAsync(
+                    It.IsAny<Expression<Func<Person, bool>>>(),
+                    It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new TechnicalException("Database unavailable"));
+
+            // Act
+            Func<Task> act = async () => await _handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            await act.Should()
+                .ThrowAsync<TechnicalException>();
 
             _fixture.RepositoryMock
                 .Verify(r => r.CountAsync(
