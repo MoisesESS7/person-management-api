@@ -2,6 +2,7 @@
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Queries.PagedSearch
 {
+    [Trait("Category", "Unit")]
     public sealed class PagedSearchQueryHandlerTests
     {
         private readonly PagedSearchQueryFixture _fixture;
