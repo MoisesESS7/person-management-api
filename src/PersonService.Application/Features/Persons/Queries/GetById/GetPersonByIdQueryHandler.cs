@@ -8,7 +8,7 @@ using PersonService.Shared.Results;
 
 namespace PersonService.Application.Features.Persons.Queries.GetById
 {
-    internal sealed class GetPersonByIdQueryHandler : IRequestHandler<GetPersonByIdQuery, ResultOfT<PersonResponse>>
+    public sealed class GetPersonByIdQueryHandler : IRequestHandler<GetPersonByIdQuery, ResultOfT<PersonResponse>>
     {
         private readonly ILogger<GetPersonByIdQueryHandler> _logger;
         private readonly IRepository<Person> _personRepository;

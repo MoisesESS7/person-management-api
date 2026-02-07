@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Shared", "src\PersonService.Shared\PersonService.Shared.csproj", "{1A5D51E9-3412-4115-8C41-D77C4A1F9160}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Infra.Ioc", "src\PersonService.Infra.Ioc\PersonService.Infra.Ioc.csproj", "{4157F02E-443F-4CF0-8AB9-6E3C7B14EB17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BB264165-3588-49A5-A626-9320D3B4252A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonService.Tests", "tests\PersonService.Tests\PersonService.Tests.csproj", "{8C4F091F-A131-4947-A7F5-1437933F27F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{4157F02E-443F-4CF0-8AB9-6E3C7B14EB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4157F02E-443F-4CF0-8AB9-6E3C7B14EB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4157F02E-443F-4CF0-8AB9-6E3C7B14EB17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C4F091F-A131-4947-A7F5-1437933F27F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C4F091F-A131-4947-A7F5-1437933F27F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C4F091F-A131-4947-A7F5-1437933F27F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C4F091F-A131-4947-A7F5-1437933F27F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{6610C98F-E108-41A4-8429-C4E9BF1BE434} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1A5D51E9-3412-4115-8C41-D77C4A1F9160} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{4157F02E-443F-4CF0-8AB9-6E3C7B14EB17} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8C4F091F-A131-4947-A7F5-1437933F27F5} = {BB264165-3588-49A5-A626-9320D3B4252A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FC0D326-73A3-45E6-A585-87BDD0AF05B0}

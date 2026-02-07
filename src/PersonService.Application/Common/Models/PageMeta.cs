@@ -14,7 +14,7 @@ namespace PersonService.Application.Common.Models
             get { return _pageNumber; }
             private set
             {
-                if (value > TotalPages)
+                if (value > TotalPages && TotalPages > 0)
                     throw new PageNotFoundException("The requested page does not exist.");
 
                 _pageNumber = value;
