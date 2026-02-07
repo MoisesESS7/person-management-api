@@ -9,7 +9,7 @@ using PersonService.Shared.Results;
 
 namespace PersonService.Application.Features.Persons.Queries.PagedSearch
 {
-    internal sealed class PagedSearchQueryHandler : IRequestHandler<PagedSearchQuery, ResultOfT<PagedResult<PersonResponse>>>
+    public sealed class PagedSearchQueryHandler : IRequestHandler<PagedSearchQuery, ResultOfT<PagedResult<PersonResponse>>>
     {
         private readonly ILogger<PagedSearchQueryHandler> _logger;
         private readonly IRepository<Person> _personRepository;
