@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 
 namespace PersonService.Tests.Unit.Application.Features.Persons.Queries.GetById
 {
+    [Trait("Category", "Unit")]
     public sealed class GetPersonByIdQueryHandlerTests
     {
         private readonly GetPersonByIdQueryFixture _fixture;
