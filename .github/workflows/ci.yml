@@ -17,7 +17,7 @@ jobs:
       mongodb:
         image: mongo:7
         ports:
-          - ${{ secrets.MONGO_PORT }}:27017
+          - 27017:27017
 
     env:
       ASPNETCORE_ENVIRONMENT: Development
