@@ -119,6 +119,24 @@ O projeto segue os princípios da Clean Architecture, com responsabilidades bem 
 
 - **RFC 7807 (Problem Details)**
 
+- **MongoDB** (banco de dados NoSQL)
+
+- **MongoDB.Driver** (driver oficial do MongoDB para .NET)
+
+- **Health Checks** (monitoramento de saúde da aplicação e banco)
+
+- **Docker** (containerização da aplicação)
+
+- **Docker Compose** (orquestração de containers)
+
+- **GitHub Actions** (CI/CD)
+
+- **Swagger / OpenAPI** (documentação da API)
+
+- **CORS Policy** (controle de acesso entre domínios)
+
+- **Multi-environment configuration** (dev, staging e production)
+
 ---
 
 ## 🧪 Estratégia de Testes
@@ -155,49 +173,42 @@ Arquivos .http também são utilizados para testes manuais e exploratórios.
 
 ---
 
-## 🚀 CI/CD & Docker (Planejado)
+## 🚀 CI/CD & Docker
 
-A aplicação está preparada para automação completa de build, testes e deploy.
+A aplicação está preparada para **containerização e automação de build e deploy**.
 
-**Planejamento de CI/CD:**
+### CI/CD
 
-- GitHub Actions
+Utiliza **GitHub Actions** para automação do ciclo de vida da aplicação.
 
-**Pipelines separados para:**
+**Pipelines configurados para:**
 
-- Build
+- Build da aplicação
+- Execução de testes
+- Build e publicação de imagem Docker
+- Deploy por ambiente
 
-- Testes
+### Docker & Containers
 
-- Docker
+A aplicação é executada em containers utilizando:
 
-**Execução automática de:**
+- **Dockerfile multi-stage** para build e execução da API
+- **Docker Compose** para orquestração dos serviços
 
-- Testes unitários
+**Serviços containerizados:**
 
-- Testes de integração
-
-- Análise de build
-
-**Docker & Containers:**
-
-- Dockerfile para a API
-
-**Docker Compose para:**
-
-- API
-
+- API (.NET)
 - MongoDB
 
-**Preparação para ambientes:**
+### Ambientes suportados
 
-- dev
+A infraestrutura foi preparada para múltiplos ambientes:
 
-- staging
+- **Development**
+- **Staging**
+- **Production**
 
-- production
-
-Essa abordagem facilita deploy contínuo, observabilidade e escalabilidade.
+Essa abordagem permite **deploy automatizado, isolamento de ambientes e maior consistência entre desenvolvimento e produção**.
 
 ---
 
@@ -225,19 +236,19 @@ Essa abordagem facilita deploy contínuo, observabilidade e escalabilidade.
 
 - Uso do padrão Result
 
----
-
-## 🔜 Funcionalidades Planejadas
-
 - Testes automatizados (unitários e integração)
-
-- Versionamento de API
-
-- Autenticação e autorização
 
 - Docker e Docker Compose
 
 - CI/CD com GitHub Actions
+
+---
+
+## 🔜 Funcionalidades Planejadas
+
+- Versionamento de API
+
+- Autenticação e autorização
 
 - Implementação de HATEOAS
 
@@ -250,6 +261,90 @@ Essa abordagem facilita deploy contínuo, observabilidade e escalabilidade.
 - .NET SDK 8+
 - MongoDB
 - Git
+
+---
+
+## ▶️ Como executar a aplicação
+
+A aplicação pode ser executada **localmente com .NET** ou utilizando **Docker**.
+
+### Executando localmente
+
+**Pré-requisitos:**
+
+- .NET 8 SDK
+- MongoDB
+
+**Passos:**
+
+- Clonar o repositório
+```text
+git clone https://github.com/SEU_USUARIO/person-service-api.git
+cd person-service-api
+```
+
+**Restaurar dependências**
+```text
+dotnet restore
+```
+
+**Restaurar ferramentas locais**
+```text
+dotnet tool restore
+```
+
+**Executar a aplicação**
+```text
+dotnet run --project src/PersonService.Api
+```
+
+**A API estará disponível em:**
+```text
+http://localhost:8080
+```
+
+**Swagger:**
+```text
+http://localhost:8080/swagger
+```
+
+**Executando com Docker**
+
+**Pré-requisitos:**
+
+Docker
+
+Docker Compose
+
+**Subir a aplicação e o banco de dados:**
+```text
+docker compose up --build
+```
+
+**Serviços iniciados:**
+
+API (.NET)
+
+MongoDB
+
+**A API estará disponível em:**
+```text
+http://localhost:8082
+```
+
+Configuração de ambiente
+
+As variáveis de ambiente são configuradas através de arquivos **.env.**
+
+**Utilize o arquivo de exemplo:**
+```text
+.env.example
+```
+
+Crie seu arquivo local:
+```text
+.env
+```
 
 ---
 
